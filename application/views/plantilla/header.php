@@ -31,7 +31,7 @@
 </head>
 
 
-<body>
+<body class="bg-info">
     <!-- ------ Navbar ----- -->
     <nav class="navbar bg-primary navbar-expand-lg fixed-top navbar-lightpy-3" id="mainNav">
         <div class="container px-4 px-lg-5">
