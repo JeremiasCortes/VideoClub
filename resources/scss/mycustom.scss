@@ -6,6 +6,7 @@ $warning: #f29729;
 $danger: #f44336;
 $light: #f8f8f7;
 $dark: #140F0E;
+$white: $light;
 
 $theme-colors: (
   "primary": $primary,
@@ -14,7 +15,18 @@ $theme-colors: (
   "warning": $warning,
   "danger": $danger,
   "light": $light,
-  "dark": $dark
+  "dark": $dark,
+  "white": $white
 );
+
+$navbar-light-hover-color:rgba($dark, .8);
+
+$--bs-tertiary-bg: #{$primary};
+
+
+
+
+
+
 
 @import "../node_modules/bootstrap/scss/bootstrap";
