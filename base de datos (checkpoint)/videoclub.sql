@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 26-04-2024 a las 13:02:43
+-- Tiempo de generación: 30-04-2024 a las 13:01:35
 -- Versión del servidor: 5.7.36
 -- Versión de PHP: 8.1.3
 
@@ -100,7 +100,8 @@ CREATE TABLE `pelicula` (
   `nom` varchar(32) COLLATE utf8_spanish_ci NOT NULL,
   `direccion` varchar(32) COLLATE utf8_spanish_ci DEFAULT NULL,
   `categoria_id` int(16) DEFAULT NULL,
-  `caratula` varchar(8) COLLATE utf8_spanish_ci NOT NULL DEFAULT '0.jpg',
+  `caratula_jpg` varchar(8) COLLATE utf8_spanish_ci NOT NULL DEFAULT '0.jpg',
+  `caratula_png` varchar(8) COLLATE utf8_spanish_ci NOT NULL DEFAULT '0.png',
   `descripcion` text COLLATE utf8_spanish_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -108,17 +109,17 @@ CREATE TABLE `pelicula` (
 -- Volcado de datos para la tabla `pelicula`
 --
 
-INSERT INTO `pelicula` (`id`, `nom`, `direccion`, `categoria_id`, `caratula`, `descripcion`) VALUES
-(1, 'Cadena Perpetua', 'Frank Darabont', 3, '1.jpg', 'Andrew Dufresne es un hombre inocente que es acusado del asesinato de su mujer. Tras ser condenado a cadena perpetua, es enviado a la cÃ¡rcel de Shawshank, en Maine.'),
-(2, 'El padrino', 'Francis Ford Coppola', 5, '2.jpg', 'Don Vito Corleone es el respetado y temido jefe de una de las cinco familias de la mafia de Nueva York en los aÃ±os 40. El hombre tiene cuatro hijos: Connie, Sonny, Fredo y Michael, que no quiere saber nada de los negocios sucios de su padre.'),
-(3, 'Batman', 'Matt Reeves', 1, '3.jpg', 'En su segundo aÃ±o luchando contra el crimen, Batman explora la corrupciÃ³n existente en la ciudad de Gotham y el vÃ­nculo de esta con su propia familia. AdemÃ¡s, entrar en conflicto con un asesino en serie conocido como el Joker'),
-(4, '12 Hombres sin piedad', 'Sidney Lumet', 5, '4.jpg', 'Multipremiado drama judicial de Sidney Lumet en el que un brillante reparto se encarga de dar vida a un jurado popular en un caso de parricidio.'),
-(5, 'La lista de schindler', 'Steven Spielberg', 3, '5.jpg', 'Oskar Schindler, un hombre de enorme astucia y talento organiza un ambicioso plan para ganarse la simpatÃ­a de los nazis y a la vez poder rescatar a miles de judÃ­os.'),
-(6, 'El seÃ±or de los anillos', 'Peter Jackson', 2, '6.jpg', 'En la Tierra Media, Frodo BolsÃ³n, de las verdes praderas de La Comarca, se embarca en una larga y peligrosa aventura para evitar que un anillo mÃ¡gico, heredado de su tÃ­o Bilbo BolsÃ³n, caiga ahora en poder de Sauron, seÃ±or de Mordor, que pretende usar su poder para someter a todos los pueblos libres.'),
-(7, 'Pulp fiction', 'Quentin Tarantino', 2, '7.jpg', 'Historias de dos matones, un boxeador y una pareja de atracadores de poca monta envueltos en una violencia espectacular e irÃ³nica.'),
-(8, 'El bueno, el malo y el feo', 'Sergio Leone', 4, '8.jpg', 'Los protagonistas son tres cazadores de recompensas que buscan un tesoro que ninguno de ellos puede encontrar sin la ayuda de los otros dos. AsÃ­ que los tres colaboran entre sÃ­, al menos en apariencia.'),
-(9, 'Nanking, ciudad de vida y muerte', 'Lu Chuan', 4, '9.jpg', 'Las historias de un soldado japonÃ©s y un oficial chino relatan las atrocidades cometidas por las fuerzas japonesas durante la ocupaciÃ³n de Nanking en 1937.'),
-(17, 'a', 'a', 5, '0.jpg', 'a');
+INSERT INTO `pelicula` (`id`, `nom`, `direccion`, `categoria_id`, `caratula_jpg`, `caratula_png`, `descripcion`) VALUES
+(1, 'Cadena Perpetua', 'Frank Darabont', 3, '1.jpg', '1.png', 'Andrew Dufresne es un hombre inocente que es acusado del asesinato de su mujer. Tras ser condenado a cadena perpetua, es enviado a la cÃ¡rcel de Shawshank, en Maine.'),
+(2, 'El padrino', 'Francis Ford Coppola', 5, '2.jpg', '2.png', 'Don Vito Corleone es el respetado y temido jefe de una de las cinco familias de la mafia de Nueva York en los aÃ±os 40. El hombre tiene cuatro hijos: Connie, Sonny, Fredo y Michael, que no quiere saber nada de los negocios sucios de su padre.'),
+(3, 'Batman', 'Matt Reeves', 1, '3.jpg', '3.png', 'En su segundo aÃ±o luchando contra el crimen, Batman explora la corrupciÃ³n existente en la ciudad de Gotham y el vÃ­nculo de esta con su propia familia. AdemÃ¡s, entrar en conflicto con un asesino en serie conocido como el Joker'),
+(4, '12 Hombres sin piedad', 'Sidney Lumet', 5, '4.jpg', '4.png', 'Multipremiado drama judicial de Sidney Lumet en el que un brillante reparto se encarga de dar vida a un jurado popular en un caso de parricidio.'),
+(5, 'La lista de schindler', 'Steven Spielberg', 3, '5.jpg', '5.png', 'Oskar Schindler, un hombre de enorme astucia y talento organiza un ambicioso plan para ganarse la simpatÃ­a de los nazis y a la vez poder rescatar a miles de judÃ­os.'),
+(6, 'El seÃ±or de los anillos', 'Peter Jackson', 2, '6.jpg', '6.png', 'En la Tierra Media, Frodo BolsÃ³n, de las verdes praderas de La Comarca, se embarca en una larga y peligrosa aventura para evitar que un anillo mÃ¡gico, heredado de su tÃ­o Bilbo BolsÃ³n, caiga ahora en poder de Sauron, seÃ±or de Mordor, que pretende usar su poder para someter a todos los pueblos libres.'),
+(7, 'Pulp fiction', 'Quentin Tarantino', 2, '7.jpg', '7.png', 'Historias de dos matones, un boxeador y una pareja de atracadores de poca monta envueltos en una violencia espectacular e irÃ³nica.'),
+(8, 'El bueno, el malo y el feo', 'Sergio Leone', 4, '8.jpg', '8.png', 'Los protagonistas son tres cazadores de recompensas que buscan un tesoro que ninguno de ellos puede encontrar sin la ayuda de los otros dos. AsÃ­ que los tres colaboran entre sÃ­, al menos en apariencia.'),
+(9, 'Nanking, ciudad de vida y muerte', 'Lu Chuan', 4, '9.jpg', '9.png', 'Las historias de un soldado japonÃ©s y un oficial chino relatan las atrocidades cometidas por las fuerzas japonesas durante la ocupaciÃ³n de Nanking en 1937.'),
+(17, 'a', 'a', 5, '0.jpg', '0.png', 'a');
 
 --
 -- Índices para tablas volcadas
