@@ -94,11 +94,17 @@ $(function() {
         let idDataPelicula = $(this).data('id');
         let nombreDataPelicula = $(this).data('nom');
         $('.pelicula-a-eliminar').html(nombreDataPelicula);
+        $('#EliminarPelicula').on('click', function() {
+        $.ajax({
+            url:'<?=base_url('PeliculaController/eliminar/')?>' + idDataPelicula,
+            type: 'POST',
+            success: function(response){
+                alert('Se ha eliminado correctamente la película' + idDataPelicula);
+            }
+        })
+    });
     });
 
-    $('#EliminarPelicula').on('click', function() {
-        $('#ModalEliminar').modal('toggle');
-        $('#ModalEliminado').modal('toggle');
-    });
+    
 })
 </script>

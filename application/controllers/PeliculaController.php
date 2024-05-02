@@ -24,6 +24,10 @@ class PeliculaController extends CI_Controller {
         $this -> load -> view('plantilla', $cuerpoDeLaPagina);
     }
 
+    public function eliminar(int $id = 0){
+        echo $id;
+    }
+
     
 }    
 ?>
