@@ -91,14 +91,64 @@
         <div class="modal-dialog">
             <div class="modal-content bg-info">
                 <div class="modal-header ">
-                    <h5 class="modal-title"><strong>Modificar Pelicuka</strong></h5>
+                    <h5 class="modal-title"><strong>Modificar datos de la Pelicula</strong></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
 
+                    <form class="row g-3 needs-validation" novalidate>
+                        <div class="col-md-4">
+                            <label for="validationCustom01" class="form-label">ID</label>
+                            <input type="text" class="form-control" id="validationCustom01" value="" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom02" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="validationCustom02" value="" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom02" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="validationCustom02" value="" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom02" class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="validationCustom02" value="" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="validationCustom04" class="form-label">Categoria</label>
+                            <select class="form-select" id="validationCustom04" required>
+                                <!-- <option selected disabled value="">Choose...</option> -->
+                                <option>...</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid state.
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="validationCustom05" class="form-label">Zip</label>
+                            <input type="text" class="form-control" id="validationCustom05" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid zip.
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                <label class="form-check-label" for="invalidCheck">
+                                    Agree to terms and conditions
+                                </label>
+                                <div class="invalid-feedback">
+                                    You must agree before submitting.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="">Submit form</button>
+                        </div>
+                    </form>
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-outline-warning" id="EliminarPelicula">Modificar</button>
                 </div>
             </div>
@@ -126,6 +176,6 @@ $(function() {
         });
     })
 
-    $('#ModalModificar').modal('show');
+    $('#ModalModificar').modal('toggle');
 })
 </script>

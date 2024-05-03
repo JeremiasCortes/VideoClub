@@ -30,6 +30,11 @@ class PeliculaController extends CI_Controller {
         $cuerpoDeLaPagina['contenido'] = 'Pelicula/eliminar';
     }
 
+    public function index2(){
+        $this -> load -> model('PeliculaModel');
+        echo $this->db->last_query();
+    }
+
 
 }    
 ?>

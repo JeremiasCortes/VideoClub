@@ -11,4 +11,11 @@ class PeliculaModel extends CI_Model{
 
         return $this->db->delete('pelicula', array('id' => $id));
     }
+
+    public function getPeliculaJoinCategoria($limit = null){
+        $this -> db -> select ('*');
+        $this -> db -> from('pelicula');
+        $this -> db -> join('categoria', 'pelicula.categoria_id = categoria.id');
+        return $this -> db -> get ();
+    }
 }
