@@ -11,9 +11,9 @@ class PeliculaController extends CI_Controller {
 
         //? Dependiendo del valor cargamos una vista o otra
         if ($VerComoTarjeta === true) {
-            $cuerpoDeLaPagina['contenido'] = 'plantilla/Pelicula/tarjetas';
+            $cuerpoDeLaPagina['contenido'] = 'Pelicula/tarjetas';
         } else {
-            $cuerpoDeLaPagina['contenido'] = 'plantilla/Pelicula/tabla';
+            $cuerpoDeLaPagina['contenido'] = 'Pelicula/tabla';
         }
 
         //? Cargamos el contenido de la base de datos en el indice SQL_Peliculas
@@ -24,10 +24,12 @@ class PeliculaController extends CI_Controller {
         $this -> load -> view('plantilla', $cuerpoDeLaPagina);
     }
 
-    public function eliminar(int $id = 0){
-        echo $id;
+    public function eliminar(int $id){
+        $this -> load -> model('PeliculaModel');
+        $this -> PeliculaModel -> deletePeliculaById($id);
+        $cuerpoDeLaPagina['contenido'] = 'Pelicula/eliminar';
     }
 
-    
+
 }    
 ?>

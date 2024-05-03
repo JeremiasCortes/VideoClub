@@ -102,3 +102,6 @@
         <?php endif?>
     </div>
     <!-- ------ Fin Banner ----- -->
+
+    <div id="avisos">
+    </div>
