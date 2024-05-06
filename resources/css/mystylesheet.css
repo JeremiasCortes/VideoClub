@@ -16,3 +16,14 @@
 		0px 0px 65.3px rgba(0, 0, 0, 0.097), 0px 0px 75.2px rgba(0, 0, 0, 0.096),
 		0px 0px 72px rgba(0, 0, 0, 0.1);
 }
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el cuerpo ocupe al menos toda la altura de la ventana */
+}
+
+footer {
+    margin-top: auto; /* Empuja el footer hacia abajo */
+}
+

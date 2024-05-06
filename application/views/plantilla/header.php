@@ -67,9 +67,7 @@
                                 <hr class="dropdown-divider" />
                             </li>
                             <li>
-                                <p class="dropdown-item disabled text-info " href="#">Elige el formato de como deseas
-                                    visualizar el
-                                    contenido</p>
+                                <p class="dropdown-item disabled text-info " href="#">¿Cómo deseas visualizarlo?</p>
                             </li>
                         </ul>
                     </li>
@@ -102,6 +100,3 @@
         <?php endif?>
     </div>
     <!-- ------ Fin Banner ----- -->
-
-    <div id="avisos">
-    </div>
