@@ -6,10 +6,10 @@
         </button>
     </div>
 
-    <!-- Nuevo Modal -->
+    <!-- Modal Nueva Pelicula -->
     <div class="modal fade" id="NuevoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content bg-info text-light text-uppercase fw-bolder">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Nuevo Modal</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -17,22 +17,22 @@
                 <div class="modal-body">
                     <form id="formAñadir" class="row g-3 needs-validation">
                         <div class="col-md-2">
-                            <label for="idAñadir" class="form-label">ID</label>
-                            <input type="text" class="form-control" id="idAñadir" name="id" value="" readonly>
+                            <label for="idAñadir" class="form-label ">ID</label>
+                            <input type="text" class="form-control bg-dark" id="idAñadir" name="id" value="" readonly>
                         </div>
                         <div class="col-md-5">
-                            <label for="nombreAñadir" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombreAñadir" name="nombre" value=""
+                            <label for="nombreAñadir" class="form-label ">Nombre</label>
+                            <input type="text" class="form-control bg-secondary" id="nombreAñadir" name="nombre" value=""
                                 required>
                         </div>
                         <div class="col-md-5">
                             <label for="direccionAñadir" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" id="direccionAñadir" name="direccion" value=""
+                            <input type="text" class="form-control bg-secondary" id="direccionAñadir" name="direccion" value=""
                                 required>
                         </div>
                         <div class="col-md-12">
                             <label for="categoriaAñadir" class="form-label">Categoria</label>
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select bg-secondary text-light" aria-label="Default select example">
                                 <option selected disabled>Selecciona la categoria de la pelicula</option>
                                 <?php foreach ($SQL_Categorias as $categoria): ?>
                                 <option value="<?=$categoria->id_categoria;?>"><?=$categoria->nom_categoria;?></option>
@@ -41,7 +41,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="descripcionAñadir" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="descripcionAñadir" rows="4" value=""
+                            <textarea class="form-control bg-secondary" id="descripcionAñadir" rows="4" value=""
                                 required></textarea>
                         </div>
                         <div class="modal-footer d-flex justify-content-between">
@@ -55,6 +55,7 @@
         </div>
     </div>
 
+    <!-- Tabla/Listado de peliculas -->
     <div class="table-responsive">
         <table class="table caption-top table-dark table-striped table-bordered align-middle datos-peliculas">
             <caption class="text-light">Datos de Peliculas</caption>
@@ -101,7 +102,6 @@
         </table>
     </div>
 
-
     <!-- Modal Eliminar Pelicula (Por Confirmar) -->
     <div class="modal fade" id="ModalEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -123,7 +123,7 @@
         </div>
     </div>
 
-    <!-- Modal (Realizado) -->
+    <!-- Modal Realizado -->
     <div class="modal fade" id="ModalEliminado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content bg-success-subtle">
@@ -146,39 +146,38 @@
     <!-- Modificar Pelicula -->
     <div class="modal fade" id="ModalModificar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content bg-info">
+            <div class="modal-content bg-info text-light text-uppercase fw-bolder">
                 <div class="modal-header">
-                    <h5 class="modal-title"><strong>Modificar datos de la Película</strong></h5>
+                    <h5 class="modal-title text-primary"><strong>Modificar datos de la Película</strong></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="formModificar" class="row g-3 needs-validation">
                         <div class="col-md-2">
                             <label for="idModificar" class="form-label">ID</label>
-                            <input type="text" class="form-control" id="idModificar" name="id" value="" readonly>
+                            <input type="text" class="form-control bg-dark" id="idModificar" name="id" value="" readonly>
                         </div>
                         <div class="col-md-5">
                             <label for="nombreModificar" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombreModificar" name="nombre" value=""
+                            <input type="text" class="form-control bg-secondary" id="nombreModificar" name="nombre" value=""
                                 required>
                         </div>
                         <div class="col-md-5">
                             <label for="direccionModificar" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" id="direccionModificar" name="direccion" value=""
+                            <input type="text" class="form-control bg-secondary" id="direccionModificar" name="direccion" value=""
                                 required>
                         </div>
                         <div class="col-md-12">
                             <label for="categoriaModificar" class="form-label">Categoria</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected disabled>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="form-select bg-secondary text-light modal-modificar-select" aria-label="Default select example">
+                                <?php foreach ($SQL_Categorias as $categoria): ?>
+                                <option value="<?=$categoria->id_categoria;?>"><?=$categoria->nom_categoria;?></option>
+                                <?php endforeach;?>
                             </select>
                         </div>
                         <div class="col-md-12">
                             <label for="descripcionModificar" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="descripcionModificar" rows="4" value=""
+                            <textarea class="form-control bg-secondary" id="descripcionModificar" rows="4" value=""
                                 required></textarea>
                         </div>
                         <div class="modal-footer d-flex justify-content-between">
@@ -220,7 +219,7 @@ $(function() {
         var idPelicula = $(this).data('id');
         // Realizar solicitud AJAX para obtener detalles de la película
         $.ajax({
-            url: '<?= base_url('PeliculaController/getPeliculaById/') ?>' + idPelicula,
+            url: '<?= base_url('PeliculaController/getPeliculaById_and_Categoria/') ?>' + idPelicula,
             type: 'POST',
             dataType: 'json', // Esperamos recibir datos en formato JSON
             success: function(response) {
@@ -229,6 +228,8 @@ $(function() {
                 $('#nombreModificar').val(response.nom);
                 $('#direccionModificar').val(response.direccion);
                 $('#descripcionModificar').val(response.descripcion);
+                $('.modal-modificar-select > option[value='+(response.id_categoria)+']').attr("selected",true);
+
                 // Mostrar la modal de modificar
                 $('#ModalModificar').modal('show');
             }
@@ -238,10 +239,12 @@ $(function() {
     $('#formModificar').submit(function(event) {
         event.preventDefault(); // Evitar el envío del formulario por defecto 
         // Obtener los datos del formulario
-        var id = $('#idModificar').val();
-        var nombre = $('#nombreModificar').val();
-        var direccion = $('#direccionModificar').val();
-        var descripcion = $('#descripcionModificar').val();
+        let id = $('#idModificar').val();
+        let nombre = $('#nombreModificar').val();
+        let direccion = $('#direccionModificar').val();
+        let descripcion = $('#descripcionModificar').val();
+        let id_categoria = $('.modal-modificar-select').val();
+
         // Enviar los datos por AJAX al controlador
         $.ajax({
             url: '<?= base_url('PeliculaController/modificarPelicula/') ?>', // Reemplazar con la URL del controlador
@@ -250,7 +253,8 @@ $(function() {
                 id: id,
                 nombre: nombre,
                 direccion: direccion,
-                descripcion: descripcion
+                descripcion: descripcion,
+                id_categoria: id_categoria
             },
             success: function(response) {
                 // Actualizar la fila modificada en la tabla

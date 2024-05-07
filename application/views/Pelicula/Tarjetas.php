@@ -1,5 +1,5 @@
 <div class="container mt-4">
-    <div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="row row-cols-1 row-cols-md-4 g-4 contenedor-tarjetas">
         <?php foreach($SQL_Peliculas as $SQL_Pelicula) : ?>
         <div class="col">
             <div class="card bg-dark mt-5 tarjeta-<?=$SQL_Pelicula->id;?>">
@@ -115,7 +115,8 @@
 
 <script>
 $(function() {
-    $('.eliminar').on('click', '.eliminar', function(){
+    $('.contenedor-tarjetas').on('click', '.eliminar', function(){
+
         let idDataPelicula = $(this).data('id');
         let nombreDataPelicula = $(this).data('nom');
         $('.pelicula-a-eliminar').html(nombreDataPelicula);

@@ -46,10 +46,10 @@ class PeliculaController extends CI_Controller {
      *
      * @param int $id El ID de la película.
      */
-    public function getPeliculaById($id) {
+    public function getPeliculaById_and_Categoria($id) {
         $this -> load -> model('PeliculaModel');
         // Devolver los datos como JSON
-        echo json_encode($this -> PeliculaModel -> getPeliculaById($id));
+        echo json_encode($this -> PeliculaModel -> getPeliculaById_and_Categoria($id));
     }
 
     /**

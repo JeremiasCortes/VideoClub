@@ -26,9 +26,11 @@ class PeliculaModel extends CI_Model{
      * 
      * @param int $id El ID de la pelicula.
      */
-    public function getPeliculaById(int $id) {
-        // Realizar una consulta a la base de datos para obtener los detalles de la película por su ID
-        $this->db->where('id', $id);
+    public function getPeliculaById_and_Categoria(int $id) {
+        // Realizar una consulta a la base de datos para obtener los detalles de la película y tabla categoria en base al ID de la pelicula
+        $this->db->select('pelicula.*, categoria.nom_categoria, categoria.id_categoria');
+        $this->db->join('categoria', 'pelicula.categoria_id = categoria.id_categoria');
+        $this->db->where('pelicula.id', $id);
         return $this->db->get('pelicula')->row();
     }
 
