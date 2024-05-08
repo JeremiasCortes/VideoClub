@@ -1,13 +1,16 @@
 <div class="container mt-4 mb-5">
     <!-- Agregar un botón original para abrir un nuevo modal -->
     <div class="text-center">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#NuevoModal">
-            ¡Nuevo Modal!
+        <button type="button" class="btn btn-primary" id='button-ModalAnadir'>
+            ¡Nueva Alta de Pelicula!
+        </button>
+        <button type="button" class="btn btn-primary" id="a">
+            Testing
         </button>
     </div>
 
     <!-- Modal Nueva Pelicula -->
-    <div class="modal fade" id="NuevoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ModalAnadir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content bg-info text-light text-uppercase fw-bolder">
                 <div class="modal-header">
@@ -22,30 +25,35 @@
                         </div>
                         <div class="col-md-5">
                             <label for="nombreAñadir" class="form-label ">Nombre</label>
-                            <input type="text" class="form-control bg-secondary" id="nombreAñadir" name="nombre" value=""
-                                required>
+                            <input type="text" class="form-control bg-secondary" id="nombreAñadir" name="nombre"
+                                value="" required>
                         </div>
                         <div class="col-md-5">
                             <label for="direccionAñadir" class="form-label">Dirección</label>
-                            <input type="text" class="form-control bg-secondary" id="direccionAñadir" name="direccion" value=""
-                                required>
+                            <input type="text" class="form-control bg-secondary" id="direccionAñadir" name="direccion"
+                                value="" required>
                         </div>
                         <div class="col-md-12">
                             <label for="categoriaAñadir" class="form-label">Categoria</label>
-                            <select class="form-select bg-secondary text-light" aria-label="Default select example">
-                                <option selected disabled>Selecciona la categoria de la pelicula</option>
+                            <select class="form-select bg-secondary text-light modal-anadir-select"
+                                aria-label="Default select example">
+                                <option selected disabled value="0">Selecciona la categoria de la pelicula</option>
                                 <?php foreach ($SQL_Categorias as $categoria): ?>
                                 <option value="<?=$categoria->id_categoria;?>"><?=$categoria->nom_categoria;?></option>
                                 <?php endforeach;?>
                             </select>
                         </div>
+                        <!-- <div class="mb-3">
+                            <label for="formFile" class="form-label">Introduce portada de la Pelicula</label>
+                            <input class="form-control bg-secondary text-light" type="file" id="formFile">
+                        </div> -->
                         <div class="col-md-12">
                             <label for="descripcionAñadir" class="form-label">Descripción</label>
                             <textarea class="form-control bg-secondary" id="descripcionAñadir" rows="4" value=""
                                 required></textarea>
                         </div>
                         <div class="modal-footer d-flex justify-content-between">
-                            <button type="button" class="btn btn-outline-secondary"
+                            <button type="button" class="btn btn-outline-secondary cancelar"
                                 data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-outline-primary">Añadir</button>
                         </div>
@@ -57,7 +65,8 @@
 
     <!-- Tabla/Listado de peliculas -->
     <div class="table-responsive">
-        <table class="table caption-top table-dark table-striped table-bordered align-middle datos-peliculas">
+        <table class="table caption-top table-dark table-striped table-bordered align-middle datos-peliculas"
+            id="tabla">
             <caption class="text-light">Datos de Peliculas</caption>
             <thead>
                 <tr>
@@ -71,7 +80,7 @@
             </thead>
             <tbody class="table-group-divider">
                 <?php foreach ($SQL_Peliculas as $SQL_Pelicula) : ?>
-                <tr id="<?=$SQL_Pelicula->id;?>">
+                <tr id="columna-con-id-<?=$SQL_Pelicula->id;?>">
                     <td scope="row fs-1"><?=$SQL_Pelicula->id;?></td>
                     <td scope="row"><?=$SQL_Pelicula->nom;?></td>
                     <td scope="row"><?=$SQL_Pelicula->direccion;?></td>
@@ -83,16 +92,16 @@
                     <td scope="row">
                         <div class="d-grid gap-1">
                             <button class="btn btn-outline-warning boton-modificar-pelicula" type="button"
-                                data-id="<?=$SQL_Pelicula->id;?>" data-nom="<?=$SQL_Pelicula->nom;?>"
-                                data-bs-toggle="modal" data-bs-target="#ModalModificar"><i class="bi bi-sliders">
+                                data-id="<?=$SQL_Pelicula->id;?>" data-nom="<?=$SQL_Pelicula->nom;?>"><i
+                                    class="bi bi-sliders">
                                     Modificar</i></button>
                         </div>
                     </td>
                     <td scope="row">
                         <div class="d-grid gap-1">
                             <button class="btn btn-outline-danger eliminar" type="button"
-                                data-id="<?=$SQL_Pelicula->id;?>" data-nom="<?=$SQL_Pelicula->nom;?>"
-                                data-bs-toggle="modal" data-bs-target="#ModalEliminar"><i class="bi bi-trash3-fill">
+                                data-id="<?=$SQL_Pelicula->id;?>" data-nom="<?=$SQL_Pelicula->nom;?>"><i
+                                    class="bi bi-trash3-fill">
                                     Eliminar</i></button>
                         </div>
                     </td>
@@ -124,7 +133,7 @@
     </div>
 
     <!-- Modal Realizado -->
-    <div class="modal fade" id="ModalEliminado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ModalRealizado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content bg-success-subtle">
                 <div class="modal-header ">
@@ -155,21 +164,23 @@
                     <form id="formModificar" class="row g-3 needs-validation">
                         <div class="col-md-2">
                             <label for="idModificar" class="form-label">ID</label>
-                            <input type="text" class="form-control bg-dark" id="idModificar" name="id" value="" readonly>
+                            <input type="text" class="form-control bg-dark" id="idModificar" name="id" value=""
+                                readonly>
                         </div>
                         <div class="col-md-5">
                             <label for="nombreModificar" class="form-label">Nombre</label>
-                            <input type="text" class="form-control bg-secondary" id="nombreModificar" name="nombre" value=""
-                                required>
+                            <input type="text" class="form-control bg-secondary" id="nombreModificar" name="nombre"
+                                value="" required>
                         </div>
                         <div class="col-md-5">
                             <label for="direccionModificar" class="form-label">Dirección</label>
-                            <input type="text" class="form-control bg-secondary" id="direccionModificar" name="direccion" value=""
-                                required>
+                            <input type="text" class="form-control bg-secondary" id="direccionModificar"
+                                name="direccion" value="" required>
                         </div>
                         <div class="col-md-12">
                             <label for="categoriaModificar" class="form-label">Categoria</label>
-                            <select class="form-select bg-secondary text-light modal-modificar-select" aria-label="Default select example">
+                            <select class="form-select bg-secondary text-light modal-modificar-select"
+                                aria-label="Default select example">
                                 <?php foreach ($SQL_Categorias as $categoria): ?>
                                 <option value="<?=$categoria->id_categoria;?>"><?=$categoria->nom_categoria;?></option>
                                 <?php endforeach;?>
@@ -195,19 +206,25 @@
 
 
 <script>
-$(function() {
+$(document).ready(function() {
+    $('#button-ModalAnadir').on('click', function() {
+        $('#ModalAnadir').modal('show');
+    })
+
+    // Capturar clic en el botón "Eliminar"
     $('table.datos-peliculas').on('click', '.eliminar', function() {
+        $('#ModalEliminar').modal('show');
         let idDataPelicula = $(this).data('id');
         let nombreDataPelicula = $(this).data('nom');
         $('.pelicula-a-eliminar').html(nombreDataPelicula);
         $('#EliminarPelicula').on('click', function() {
-            $('#<?=$SQL_Pelicula->id;?>').remove();
+            $('#columna-con-id-' + idDataPelicula).remove();
             $.ajax({
                 url: '<?=base_url('PeliculaController/eliminar/')?>' + idDataPelicula,
                 type: 'POST',
                 success: function() {
-                    $('#ModalEliminar').modal('toggle');
-                    $('#ModalEliminado').modal('show');
+                    $('#ModalEliminar').modal('hide');
+                    mostrarTareaRealizada();
                 }
             })
         });
@@ -215,11 +232,13 @@ $(function() {
 
     // Capturar clic en el botón "Modificar"
     $('table.datos-peliculas').on('click', '.boton-modificar-pelicula', function() {
+        $('#ModalModificar').modal('show');
         // Obtener el ID de la película desde los atributos data
         var idPelicula = $(this).data('id');
         // Realizar solicitud AJAX para obtener detalles de la película
         $.ajax({
-            url: '<?= base_url('PeliculaController/getPeliculaById_and_Categoria/') ?>' + idPelicula,
+            url: '<?= base_url('PeliculaController/getPeliculaById_and_Categoria/') ?>' +
+                idPelicula,
             type: 'POST',
             dataType: 'json', // Esperamos recibir datos en formato JSON
             success: function(response) {
@@ -228,46 +247,85 @@ $(function() {
                 $('#nombreModificar').val(response.nom);
                 $('#direccionModificar').val(response.direccion);
                 $('#descripcionModificar').val(response.descripcion);
-                $('.modal-modificar-select > option[value='+(response.id_categoria)+']').attr("selected",true);
-
-                // Mostrar la modal de modificar
-                $('#ModalModificar').modal('show');
+                $('.modal-modificar-select > option[value=' + (response.id_categoria) + ']')
+                    .attr("selected", true);
             }
         });
     });
 
+    // Modificar Pelicula
     $('#formModificar').submit(function(event) {
-        event.preventDefault(); // Evitar el envío del formulario por defecto 
         // Obtener los datos del formulario
-        let id = $('#idModificar').val();
-        let nombre = $('#nombreModificar').val();
-        let direccion = $('#direccionModificar').val();
-        let descripcion = $('#descripcionModificar').val();
-        let id_categoria = $('.modal-modificar-select').val();
+        let idPeliculaModificar = $('#idModificar').val();
+        let nombrePeliculaModificar = $('#nombreModificar').val();
+        let direccionPeliculaModificar = $('#direccionModificar').val();
+        let descripcionPeliculaModificar = $('#descripcionModificar').val();
+        let categoria_idPeliculaModificar = $('.modal-modificar-select').val();
+        $('#idModificar').val('');
+        $('#nombreModificar').val('');
+        $('#direccionModificar').val('');
+        $('#descripcionModificar').val('');
+        $('.modal-modificar-select').val('0');
 
         // Enviar los datos por AJAX al controlador
         $.ajax({
             url: '<?= base_url('PeliculaController/modificarPelicula/') ?>', // Reemplazar con la URL del controlador
             type: 'POST',
             data: {
-                id: id,
-                nombre: nombre,
-                direccion: direccion,
-                descripcion: descripcion,
-                id_categoria: id_categoria
+                id: idPeliculaModificar,
+                nombre: nombrePeliculaModificar,
+                direccion: direccionPeliculaModificar,
+                descripcion: descripcionPeliculaModificar,
+                categoria_id: categoria_idPeliculaModificar
             },
             success: function(response) {
                 // Actualizar la fila modificada en la tabla
-                $('#' + id).find('td:eq(1)').text(nombre);
-                $('#' + id).find('td:eq(2)').text(direccion);
+                $('#columna-con-id-' + idPeliculaModificar).find('td:eq(1)').text(
+                    nombrePeliculaModificar);
+                $('#columna-con-id-' + idPeliculaModificar).find('td:eq(2)').text(
+                    direccionPeliculaModificar);
                 // Actualizar el texto dentro del span de descripción
-                $('#' + id).find('td:eq(3)').find('span').text(descripcion);
+                $('#columna-con-id-' + idPeliculaModificar).find('td:eq(3)').find('span')
+                    .text(descripcionPeliculaModificar);
 
                 // Cerrar el modal
-                $('#ModalModificar').modal('toggle');
-                $('#ModalEliminado').modal('show');
+                $('#ModalModificar').modal('hide');
+                mostrarTareaRealizada();
+
             }
         });
     });
+
+    // Añadir peliculas
+    $('#formAñadir').submit(function(e) {
+        let nombre = $('#nombreAñadir').val();
+        let direccion = $('#direccionAñadir').val();
+        let descripcion = $('#descripcionAñadir').val();
+        let categoria_id = $('.modal-anadir-select').val();
+        $('#nombreAñadir').val('');
+        $('#direccionAñadir').val('');
+        $('#descripcionAñadir').val('');
+        $('.modal-anadir-select').val('0');
+
+        $.ajax({
+            url: '<?= base_url('PeliculaController/addPelicula/') ?>',
+            type: 'POST',
+            data: {
+                nom: nombre,
+                direccion: direccion,
+                descripcion: descripcion,
+                categoria: categoria_id
+            },
+            success: function(response) {
+                $('#ModalAnadir').modal('hide');
+                $('.table-responsive').load(" .table-responsive");
+                mostrarTareaRealizada();
+            }
+        });
+    })
+
+    function mostrarTareaRealizada() {
+        $('#ModalRealizado').modal('show');
+    }
 })
 </script>

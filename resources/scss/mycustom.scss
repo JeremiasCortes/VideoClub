@@ -24,7 +24,10 @@ $theme-colors: (
 $navbar-light-hover-color:rgba($dark, .8);
 
 $--bs-tertiary-bg: #{$primary};
-
+$body-color:                $info;
+$body-tertiary-bg:          $secondary;
+$form-file-button-hover-bg: $secondary;
+$body-bg-dark:              $secondary;
 
 
 

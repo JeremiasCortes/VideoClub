@@ -28,7 +28,8 @@ class PeliculaModel extends CI_Model{
      */
     public function getPeliculaById_and_Categoria(int $id) {
         // Realizar una consulta a la base de datos para obtener los detalles de la película y tabla categoria en base al ID de la pelicula
-        $this->db->select('pelicula.*, categoria.nom_categoria, categoria.id_categoria');
+        // $this->db->select('pelicula.*, categoria.nom_categoria, categoria.id_categoria');
+        $this->db->select('*');
         $this->db->join('categoria', 'pelicula.categoria_id = categoria.id_categoria');
         $this->db->where('pelicula.id', $id);
         return $this->db->get('pelicula')->row();
@@ -42,25 +43,27 @@ class PeliculaModel extends CI_Model{
      * @param $direccion La Direccion de la pelicula.
      * @param $descripcion La Descripion de la pelicula.
      */
-    public function modificarPelicula($id, $nombre, $direccion, $descripcion) {
+    public function modificarPelicula($id, $nombre, $direccion, $descripcion, $categoria_id) {
         // Actualizar los datos de la película en la base de datos
         $datos = array(
             'nom' => $nombre,
             'direccion' => $direccion,
-            'descripcion' => $descripcion
+            'descripcion' => $descripcion,
+            'categoria_id' => $categoria_id
         );
         $this->db->where('id', $id);
         $this->db->update('pelicula', $datos);
     }
 
-    public function test($id){
-        $this->db->select('pelicula.nom, categoria.nom_categoria');
-        $this->db->from('pelicula');
-        $this->db->join('categoria', 'pelicula.categoria_id = categoria.id_categoria');
-        $this->db->where('pelicula.id', $id);
-        $this->db->group_by('pelicula.id');
-        $query = $this->db->get();
-        return $query->result();
+    public function addPelicula($nombre, $direccion, $descripcion, $categoria) {
+        $data = array(
+            'nom' => $nombre,
+            'direccion' => $direccion,
+            'categoria_id' => $categoria,
+            'descripcion' => $descripcion
+            
+        );
+        $this->db->insert('pelicula', $data);
     }
 
     public function getCategorias(){

@@ -50,6 +50,7 @@ class PeliculaController extends CI_Controller {
         $this -> load -> model('PeliculaModel');
         // Devolver los datos como JSON
         echo json_encode($this -> PeliculaModel -> getPeliculaById_and_Categoria($id));
+
     }
 
     /**
@@ -61,17 +62,25 @@ class PeliculaController extends CI_Controller {
     $nombre = $this->input->post('nombre');
     $direccion = $this->input->post('direccion');
     $descripcion = $this->input->post('descripcion');
+    $categoria_id = $this->input->post('categoria_id');
     
     // Cargar el modelo de películas
     $this->load->model('PeliculaModel');
 
     // Llamar al método del modelo para modificar la película
-    $resultado = $this->PeliculaModel->modificarPelicula($id, $nombre, $direccion, $descripcion);
+    $this->PeliculaModel->modificarPelicula($id, $nombre, $direccion, $descripcion, $categoria_id);
     }
 
-    public function test(){
+    public function addPelicula(){
+        
+        $nom = $this->input->post('nom');
+        $direccion = $this->input->post('direccion');
+        $descripcion = $this->input->post('descripcion');
+        $categoria = $this->input->post('categoria');
+
         $this->load->model('PeliculaModel');
-        debug ($this->PeliculaModel->getCategorias());
+
+        $this->PeliculaModel->addPelicula($nom, $direccion, $descripcion, $categoria);
     }
 
 }    
