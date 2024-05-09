@@ -1,71 +1,14 @@
 <div class="container mt-4 mb-5">
     <!-- Agregar un botón original para abrir un nuevo modal -->
     <div class="text-center">
-        <button type="button" class="btn btn-primary" id='button-ModalAnadir'>
+        <button type="button" class="btn btn-primary" id='button-ModalAnadir' data-bs-toggle="modal" data-bs-target="#ModalAnadir">
             ¡Nueva Alta de Pelicula!
         </button>
-        <button type="button" class="btn btn-primary" id="a">
-            Testing
-        </button>
-    </div>
-
-    <!-- Modal Nueva Pelicula -->
-    <div class="modal fade" id="ModalAnadir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-info text-light text-uppercase fw-bolder">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Nuevo Modal</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="formAñadir" class="row g-3 needs-validation">
-                        <div class="col-md-2">
-                            <label for="idAñadir" class="form-label ">ID</label>
-                            <input type="text" class="form-control bg-dark" id="idAñadir" name="id" value="" readonly>
-                        </div>
-                        <div class="col-md-5">
-                            <label for="nombreAñadir" class="form-label ">Nombre</label>
-                            <input type="text" class="form-control bg-secondary" id="nombreAñadir" name="nombre"
-                                value="" required>
-                        </div>
-                        <div class="col-md-5">
-                            <label for="direccionAñadir" class="form-label">Dirección</label>
-                            <input type="text" class="form-control bg-secondary" id="direccionAñadir" name="direccion"
-                                value="" required>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="categoriaAñadir" class="form-label">Categoria</label>
-                            <select class="form-select bg-secondary text-light modal-anadir-select"
-                                aria-label="Default select example">
-                                <option selected disabled value="0">Selecciona la categoria de la pelicula</option>
-                                <?php foreach ($SQL_Categorias as $categoria): ?>
-                                <option value="<?=$categoria->id_categoria;?>"><?=$categoria->nom_categoria;?></option>
-                                <?php endforeach;?>
-                            </select>
-                        </div>
-                        <!-- <div class="mb-3">
-                            <label for="formFile" class="form-label">Introduce portada de la Pelicula</label>
-                            <input class="form-control bg-secondary text-light" type="file" id="formFile">
-                        </div> -->
-                        <div class="col-md-12">
-                            <label for="descripcionAñadir" class="form-label">Descripción</label>
-                            <textarea class="form-control bg-secondary" id="descripcionAñadir" rows="4" value=""
-                                required></textarea>
-                        </div>
-                        <div class="modal-footer d-flex justify-content-between">
-                            <button type="button" class="btn btn-outline-secondary cancelar"
-                                data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-outline-primary">Añadir</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Tabla/Listado de peliculas -->
     <div class="table-responsive">
-        <table class="table caption-top table-dark table-striped table-bordered align-middle datos-peliculas"
+        <table class="table caption-top table-dark table-striped table-bordered align-middle tabla-con-el-contenido"
             id="tabla">
             <caption class="text-light">Datos de Peliculas</caption>
             <thead>
@@ -111,127 +54,39 @@
         </table>
     </div>
 
-    <!-- Modal Eliminar Pelicula (Por Confirmar) -->
-    <div class="modal fade" id="ModalEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-danger-subtle">
-                <div class="modal-header ">
-                    <h5 class="modal-title text-primary"><strong>¡Esta acción es irreversible!</strong></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <div class="alert alert-danger" role="alert" id="alerta">
-                        Seguro que deseas eliminar la pelicula <strong class="pelicula-a-eliminar"></strong>
-                    </div>
-                </div>
-                <div class="modal-footer d-flex justify-content-between">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-outline-danger" id="EliminarPelicula">Eliminar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Modal Nueva Pelicula -->
+    <?php $this->load->view('Modales/Alta'); ?>
+
+    <!-- Modal Eliminar Pelicula -->
+    <?php $this->load->view('Modales/Eliminar'); ?>
+
 
     <!-- Modal Realizado -->
-    <div class="modal fade" id="ModalRealizado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-success-subtle">
-                <div class="modal-header ">
-                    <h5 class="modal-title text-success"><strong>Completado</strong></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <div class="alert alert-success" role="alert" id="">
-                        Tarea hecha con éxito <strong class="pelicula-a-eliminar"></strong>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php $this->load->view('Modales/Realizado'); ?>
+    
 
     <!-- Modificar Pelicula -->
-    <div class="modal fade" id="ModalModificar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-info text-light text-uppercase fw-bolder">
-                <div class="modal-header">
-                    <h5 class="modal-title text-primary"><strong>Modificar datos de la Película</strong></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="formModificar" class="row g-3 needs-validation">
-                        <div class="col-md-2">
-                            <label for="idModificar" class="form-label">ID</label>
-                            <input type="text" class="form-control bg-dark" id="idModificar" name="id" value=""
-                                readonly>
-                        </div>
-                        <div class="col-md-5">
-                            <label for="nombreModificar" class="form-label">Nombre</label>
-                            <input type="text" class="form-control bg-secondary" id="nombreModificar" name="nombre"
-                                value="" required>
-                        </div>
-                        <div class="col-md-5">
-                            <label for="direccionModificar" class="form-label">Dirección</label>
-                            <input type="text" class="form-control bg-secondary" id="direccionModificar"
-                                name="direccion" value="" required>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="categoriaModificar" class="form-label">Categoria</label>
-                            <select class="form-select bg-secondary text-light modal-modificar-select"
-                                aria-label="Default select example">
-                                <?php foreach ($SQL_Categorias as $categoria): ?>
-                                <option value="<?=$categoria->id_categoria;?>"><?=$categoria->nom_categoria;?></option>
-                                <?php endforeach;?>
-                            </select>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="descripcionModificar" class="form-label">Descripción</label>
-                            <textarea class="form-control bg-secondary" id="descripcionModificar" rows="4" value=""
-                                required></textarea>
-                        </div>
-                        <div class="modal-footer d-flex justify-content-between">
-                            <button type="button" class="btn btn-outline-secondary"
-                                data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-outline-primary">Modificar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php $this->load->view('Modales/Modificar'); ?>
+
 
 </div>
 
 
 <script>
-$(document).ready(function() {
-    $('#button-ModalAnadir').on('click', function() {
-        $('#ModalAnadir').modal('show');
+$(function() {
+    // Capturar clic en el botón "Eliminar" de la tabla
+    $('table.tabla-con-el-contenido').on('click', '.eliminar', function() {
+        // ID de la pelicula que se desea borrar
+        let IdToDelete = $(this).data('id');
+        // Nombre de la pelicula que se desea borrar
+        let nameToDelete = $(this).data('nom');
+        // URL de la petición AJAX para borrar la película
+        let urlPeticionAJAX = '<?=base_url('PeliculaController/eliminar/');?>'+IdToDelete;
+        eliminar_mediante_AJAX(IdToDelete, nameToDelete, urlPeticionAJAX, modalShowEliminar('show'));
     })
 
-    // Capturar clic en el botón "Eliminar"
-    $('table.datos-peliculas').on('click', '.eliminar', function() {
-        $('#ModalEliminar').modal('show');
-        let idDataPelicula = $(this).data('id');
-        let nombreDataPelicula = $(this).data('nom');
-        $('.pelicula-a-eliminar').html(nombreDataPelicula);
-        $('#EliminarPelicula').on('click', function() {
-            $('#columna-con-id-' + idDataPelicula).remove();
-            $.ajax({
-                url: '<?=base_url('PeliculaController/eliminar/')?>' + idDataPelicula,
-                type: 'POST',
-                success: function() {
-                    $('#ModalEliminar').modal('hide');
-                    mostrarTareaRealizada();
-                }
-            })
-        });
-    })
-
-    // Capturar clic en el botón "Modificar"
-    $('table.datos-peliculas').on('click', '.boton-modificar-pelicula', function() {
+    // Capturar clic en el botón "Modificar" de la tabla
+    $('table.tabla-con-el-contenido').on('click', '.boton-modificar-pelicula', function() {
         $('#ModalModificar').modal('show');
         // Obtener el ID de la película desde los atributos data
         var idPelicula = $(this).data('id');
@@ -253,7 +108,7 @@ $(document).ready(function() {
         });
     });
 
-    // Modificar Pelicula
+    // Modificar Pelicula dentro del Modal
     $('#formModificar').submit(function(event) {
         // Obtener los datos del formulario
         let idPeliculaModificar = $('#idModificar').val();
@@ -290,7 +145,6 @@ $(document).ready(function() {
 
                 // Cerrar el modal
                 $('#ModalModificar').modal('hide');
-                mostrarTareaRealizada();
 
             }
         });
@@ -318,14 +172,8 @@ $(document).ready(function() {
             },
             success: function(response) {
                 $('#ModalAnadir').modal('hide');
-                $('.table-responsive').load(" .table-responsive");
-                mostrarTareaRealizada();
             }
         });
     })
-
-    function mostrarTareaRealizada() {
-        $('#ModalRealizado').modal('show');
-    }
 })
 </script>

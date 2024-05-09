@@ -32,6 +32,9 @@
 
     <!--//! CSS Google Fonts -->
     <link rel="stylesheet" href=" <?= base_url('resources/css/mystylesheet.css') ?>">
+
+    <!--//! My JS -->
+    <script src="<?=base_url('resources/js/javascript.js')?>"></script>
 </head>
 
 <style>
@@ -40,8 +43,6 @@
     ?>);
     background-size: cover;
 }
-
-
 </style>
 </head>
 
