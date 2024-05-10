@@ -2,7 +2,7 @@
         <div class="modal-dialog">
             <div class="modal-content bg-info text-light text-uppercase fw-bolder">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Nuevo Modal</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><strong class="title-modal">Dar de Alta</strong></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -39,7 +39,7 @@
                         <div class="modal-footer d-flex justify-content-between">
                             <button type="button" class="btn btn-outline-secondary cancelar"
                                 data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-outline-primary">Añadir</button>
+                            <button type="submit" class="btn btn-outline-primary enviar">Añadir</button>
                         </div>
                     </form>
                 </div>
