@@ -2,11 +2,11 @@
         <div class="modal-dialog">
             <div class="modal-content bg-info text-light text-uppercase fw-bolder">
                 <div class="modal-header">
-                    <h5 class="modal-title text-primary"><strong><strong class="title-modal"></strong> datos una Película</strong></h5>
+                    <h5 class="modal-title text-primary"><strong><strong class="title-modal"></strong> datos de una Película</strong></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="formModificar" class="row g-3 needs-validation">
+                    <form id="formModificar formulario-añadir-modificar" class="row g-3 needs-validation">
                         <div class="col-md-2">
                             <label for="idModificar" class="form-label">ID</label>
                             <input type="text" class="form-control bg-dark" id="idModificar" name="id" value=""

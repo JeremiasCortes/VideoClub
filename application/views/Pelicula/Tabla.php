@@ -1,8 +1,7 @@
 <div class="container mt-4 mb-5">
     <!-- Agregar un botón original para abrir un nuevo modal -->
     <div class="text-center">
-        <button type="button" class="btn btn-primary" id='button-ModalAnadir' data-bs-toggle="modal"
-            data-bs-target="#ModalAnadir">
+        <button type="button" class="btn btn-primary" id='button-ModalAnadir'>
             ¡Nueva Alta de Pelicula!
         </button>
     </div>
@@ -88,7 +87,8 @@ $(function() {
     })
 
     // Capturar clic en el botón "Modificar" de la tabla
-    $('table.tabla-con-el-contenido').on('click', '.boton-modificar-pelicula', function() {
+    $('table.tabla-con-el-contenido').on('click', '.boton-modificar-pelicula', function(e) {
+        e.preventDefault();
         let datasAndCampos = {
             dataID: $(this).data('id'),
             campoID: $('#idModificar'),
@@ -107,74 +107,13 @@ $(function() {
         modificar_mediante_AJAX(datasAndCampos, urlAJAX, toggleModal);
     });
 
-    // Modificar Pelicula dentro del Modal
-    // $('#formModificar').submit(function(event) {
-    //     // Obtener los datos del formulario
-    //     let idPeliculaModificar = $('#idModificar').val();
-    //     let nombrePeliculaModificar = $('#nombreModificar').val();
-    //     let direccionPeliculaModificar = $('#direccionModificar').val();
-    //     let descripcionPeliculaModificar = $('#descripcionModificar').val();
-    //     let categoria_idPeliculaModificar = $('.modal-modificar-select').val();
-    //     $('#idModificar').val('');
-    //     $('#nombreModificar').val('');
-    //     $('#direccionModificar').val('');
-    //     $('#descripcionModificar').val('');
-    //     $('.modal-modificar-select').val('0');
-
-    //     // Enviar los datos por AJAX al controlador
-    //     $.ajax({
-    //         url: '<?= base_url('PeliculaController/modificarPelicula/') ?>',
-    //         type: 'POST',
-    //         data: {
-    //             id: idPeliculaModificar,
-    //             nombre: nombrePeliculaModificar,
-    //             direccion: direccionPeliculaModificar,
-    //             descripcion: descripcionPeliculaModificar,
-    //             categoria_id: categoria_idPeliculaModificar
-    //         },
-    //         success: function(response) {
-    //             // Actualizar la fila modificada en la tabla
-    //             $('#columna-con-id-' + idPeliculaModificar).find('td:eq(1)').text(
-    //                 nombrePeliculaModificar);
-    //             $('#columna-con-id-' + idPeliculaModificar).find('td:eq(2)').text(
-    //                 direccionPeliculaModificar);
-    //             // Actualizar el texto dentro del span de descripción
-    //             $('#columna-con-id-' + idPeliculaModificar).find('td:eq(3)').find('span')
-    //                 .text(descripcionPeliculaModificar);
-
-    //             // Cerrar el modal
-    //             $('#ModalModificar').modal('hide');
-
-    //         }
-    //     });
-    // });
-
     // Añadir peliculas
-    $('#formAñadir').submit(function(e) {
-        e.preventDefault();
-        let nombre = $('#nombreAñadir').val();
-        let direccion = $('#direccionAñadir').val();
-        let descripcion = $('#descripcionAñadir').val();
-        let categoria_id = $('.modal-anadir-select').val();
-        $('#nombreAñadir').val('');
-        $('#direccionAñadir').val('');
-        $('#descripcionAñadir').val('');
-        $('.modal-anadir-select').val('0');
+    
+    $('#button-ModalAnadir').on('click', function(){
+        let urlEnvioAJAX = '<?= base_url('PeliculaController/addPelicula/') ?>';
 
-        $.ajax({
-            url: '<?= base_url('PeliculaController/addPelicula/') ?>',
-            type: 'POST',
-            data: {
-                nom: nombre,
-                direccion: direccion,
-                descripcion: descripcion,
-                categoria: categoria_id
-            },
-            success: function(response) {
-                $('#ModalAnadir').modal('hide');
-                location.reload();
-            }
-        });
-    })
+        añadir_mediante_AJAX(urlEnvioAJAX, toggleModal)
+    });
+
 })
 </script>
