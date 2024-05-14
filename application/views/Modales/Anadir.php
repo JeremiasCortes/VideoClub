@@ -24,7 +24,7 @@
                         <div class="col-md-12">
                             <label for="categoriaAñadir" class="form-label">Categoria</label>
                             <select class="form-select bg-secondary text-light modal-anadir-select"
-                                aria-label="Default select example">
+                                aria-label="Default select example" required>
                                 <option selected disabled value="6">Selecciona la categoria de la pelicula</option>
                                 <?php foreach ($SQL_Categorias as $categoria): ?>
                                 <option value="<?=$categoria->id_categoria;?>"><?=$categoria->nom_categoria;?></option>

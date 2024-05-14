@@ -1,44 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PeliculaController extends CI_Controller {
-    
-    /**
-     * Método para mostrar el listado de peliculas
-     * 
-     * @param bool $VerComoTarjeta Opcional. Indica si se debe mostrar la lista como tarjetas o como tabla.
-     */
-    public function index(bool $VerComoTarjeta = false){
-        /**
-         * Se carga el Modelo para realizar consultas (Solo se carga en este controlador).
-        */
-        $this -> load -> model('PeliculaModel');
+class CategoriaController extends CI_Controller {
+
+    public function index(){
         $this -> load -> model('CategoriaModel');
-
-        //? Dependiendo del parámetro cargamos una vista o otra
-        if ($VerComoTarjeta === true) {
-            $cuerpoDeLaPagina['contenido'] = 'Pelicula/tarjetas';
-        } else {
-            $cuerpoDeLaPagina['contenido'] = 'Pelicula/tabla';
-        }
-
-        //? Cargamos el contenido de la base de datos en el indice SQL_Peliculas
-        $cuerpoDeLaPagina['SQL_Peliculas'] = $this -> PeliculaModel -> getPelicula();
         $cuerpoDeLaPagina['SQL_Categorias'] = $this -> CategoriaModel -> getAll();
-
-
-        //? Cargamos la vista y le pasamos argumentos.
+        $cuerpoDeLaPagina['contenido'] = 'Categoria/tabla';
         $this -> load -> view('plantilla', $cuerpoDeLaPagina);
     }
 
-    /**
-     * Método que elimina la pelicula especificada.
-     * 
-     * @param int $id El ID de la pelicula.
-     */
     public function eliminar(int $id){
-        $this -> load -> model('PeliculaModel');
-        $this -> PeliculaModel -> deletePeliculaById($id);
+        $this -> load -> model('CategoriaModel');
+        $this -> CategoriaModel -> deleteById($id);
         $cuerpoDeLaPagina['contenido'] = 'Pelicula/eliminar';
     }
 

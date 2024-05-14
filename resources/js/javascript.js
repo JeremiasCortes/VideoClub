@@ -1,8 +1,10 @@
+// FUNCIONA | NO TOCAR
 function toggleModal(nameModal) {
 	let stringToggle = "toggle";
 	$("#Modal" + nameModal).modal(stringToggle);
 }
 
+// FUNCIONA | NO TOCAR
 function eliminar_mediante_AJAX(datas, urlPeticionAJAX, modal) {
 	modal("Eliminar");
 	$(".pelicula-a-eliminar").html(datas.name);
@@ -19,12 +21,12 @@ function eliminar_mediante_AJAX(datas, urlPeticionAJAX, modal) {
 	});
 }
 
+// FUNCIONA | NO TOCAR
 function modificar_mediante_AJAX(
 	datas,
 	{ urlPeticionAJAX, urlEnvioAJAX },
 	modal
 ) {
-
 	$(".title-modal").text("Modificar");
 	modal("Modificar");
 	$.ajax({
@@ -39,14 +41,9 @@ function modificar_mediante_AJAX(
 			$(
 				datas.selectValue + " > option[value=" + response.id_categoria + "]"
 			).attr("selected", true);
-			
 		},
 	});
-
-
-
-	$("#formModificar").submit(function (e) {
-		e.preventDefault();
+	$(".enviar").on("click", function () {
 		$.ajax({
 			url: urlEnvioAJAX,
 			type: "POST",
@@ -55,12 +52,11 @@ function modificar_mediante_AJAX(
 				nombre: datas.campoNom.val(),
 				direccion: datas.campoDireccion.val(),
 				descripcion: datas.campoDescripcion.val(),
-				categoria_id: $(datas.selectValue).val(),
+				categoria_id: $(datas.selectValue + " option:selected").val(),
 			},
 			success: function () {
 				modal("Modificar");
 				modal("Realizado");
-
 				$("#columna-con-id-" + datas.campoID.val())
 					.find("td:eq(1)")
 					.text(datas.campoNom.val());
@@ -71,24 +67,22 @@ function modificar_mediante_AJAX(
 					.find("td:eq(3)")
 					.find("span")
 					.text(datas.campoDescripcion.val());
-			}
+			},
 		});
 	});
 }
 
+// FUNCIONA | NO TOCAR
 function añadir_mediante_AJAX(urlPeticionAJAX, modal) {
 	modal("Anadir");
-
 	$("#formAñadir").submit(function (e) {
 		e.preventDefault();
-
 		let valueOfCampos = {
 			Nombre: $("#nombreAñadir").val(),
 			Direccion: $("#direccionAñadir").val(),
 			Descripcion: $("#descripcionAñadir").val(),
-			Categoria: $(".modal-anadir-select").val(),
+			Categoria: $(".modal-anadir-select option:selected").val(),
 		};
-
 		$.ajax({
 			url: urlPeticionAJAX,
 			type: "POST",
@@ -96,7 +90,7 @@ function añadir_mediante_AJAX(urlPeticionAJAX, modal) {
 				nom: valueOfCampos.Nombre,
 				direccion: valueOfCampos.Direccion,
 				descripcion: valueOfCampos.Descripcion,
-				categoria_id: valueOfCampos.Categoria,
+				categoria: valueOfCampos.Categoria,
 			},
 			success: function () {
 				modal("Anadir");

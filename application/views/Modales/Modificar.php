@@ -39,7 +39,7 @@
                         <div class="modal-footer d-flex justify-content-between">
                             <button type="button" class="btn btn-outline-secondary"
                                 data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-outline-primary enviar">Modificar</button>
+                            <button type="button" class="btn btn-outline-primary enviar">Modificar</button>
                         </div>
                     </form>
                 </div>

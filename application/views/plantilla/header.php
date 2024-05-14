@@ -72,8 +72,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link " href="<?=base_url();?>">Categorias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?=base_url();?>">Clientes</a></li>
+                    <li class="nav-item"><a class="nav-link " href="<?=base_url('/CategoriaController');?>">Categorias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?=base_url('/ClienteController');?>">Clientes</a></li>
                 </ul>
             </div>
         </div>

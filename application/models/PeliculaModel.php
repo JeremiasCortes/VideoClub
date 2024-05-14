@@ -65,8 +65,4 @@ class PeliculaModel extends CI_Model{
         );
         $this->db->insert('pelicula', $data);
     }
-
-    public function getCategorias(){
-        return $this->db->get('categoria')->result();
-    }
 }

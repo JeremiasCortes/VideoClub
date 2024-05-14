@@ -88,7 +88,6 @@ $(function() {
 
     // Capturar clic en el botón "Modificar" de la tabla
     $('table.tabla-con-el-contenido').on('click', '.boton-modificar-pelicula', function(e) {
-        e.preventDefault();
         let datasAndCampos = {
             dataID: $(this).data('id'),
             campoID: $('#idModificar'),
