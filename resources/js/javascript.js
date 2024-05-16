@@ -27,6 +27,14 @@ function modificar_mediante_AJAX(
 	{ urlPeticionAJAX, urlEnvioAJAX },
 	modal
 ) {
+	datas.campoID.val("");
+	datas.campoNom.val("");
+	if (datas.campoDireccion) {
+		datas.campoDireccion.val("");
+		datas.campoDescripcion.val("");
+		$(datas.selectValue + ' option:first').prop('selected',true);
+	}
+
 	$(".title-modal").text("Modificar");
 	modal("Modificar");
 	$.ajax({
@@ -36,11 +44,13 @@ function modificar_mediante_AJAX(
 		success: function (response) {
 			datas.campoID.val(response.id);
 			datas.campoNom.val(response.nom);
-			datas.campoDireccion.val(response.direccion);
-			datas.campoDescripcion.val(response.descripcion);
-			$(
-				datas.selectValue + " > option[value=" + response.id_categoria + "]"
-			).attr("selected", true);
+			if (datas.campoDireccion) {
+				datas.campoDireccion.val(response.direccion);
+				datas.campoDescripcion.val(response.descripcion);
+				$(
+					datas.selectValue + " > option[value=" + response.id_categoria + "]"
+				).attr("selected", true);
+			}
 		},
 	});
 	$(".enviar").on("click", function () {
@@ -73,9 +83,18 @@ function modificar_mediante_AJAX(
 }
 
 // FUNCIONA | NO TOCAR
-function añadir_mediante_AJAX(urlPeticionAJAX, modal) {
-	modal("Anadir");
-	$("#formAñadir").submit(function (e) {
+function añadir_mediante_AJAX(datas, urlPeticionAJAX, modal) {
+	$(".title-modal").text("Añadir");
+	datas.campoID.val('');
+	datas.campoNom.val("");
+	if (datas.campoDireccion) {
+		datas.campoDireccion.val("");
+		datas.campoDescripcion.val("");
+		$(datas.selectValue + ' option:first').prop('selected',true);
+	}
+
+	modal("Modificar");
+	$("#formModal").submit(function (e) {
 		e.preventDefault();
 		let valueOfCampos = {
 			Nombre: $("#nombreAñadir").val(),

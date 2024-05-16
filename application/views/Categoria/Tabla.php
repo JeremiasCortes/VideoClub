@@ -58,6 +58,53 @@
 
     <!-- Modificar Pelicula -->
     <?php $this->load->view('Modales/Modificar'); ?>
-
-
 </div>
+
+<script>
+$(function() {
+    // Capturar clic en el botón "Eliminar" de la tabla
+    $('table.tabla-con-el-contenido').on('click', '.eliminar', function() {
+        let datasForDelete = {
+            id: $(this).data('id'),
+            name: $(this).data('nom'),
+        };
+        // URL de la petición AJAX para borrar la película
+        let urlPeticionAJAX = '<?=base_url('CategoriaController/eliminarByID/');?>' + datasForDelete.id;
+
+        eliminar_mediante_AJAX(datasForDelete, urlPeticionAJAX, toggleModal);
+    })
+
+    // Capturar clic en el botón "Modificar" de la tabla
+    $('table.tabla-con-el-contenido').on('click', '.boton-modificar-pelicula', function(e) {
+        let datasAndCampos = {
+            dataID: $(this).data('id'),
+            campoID: $('#idModificar'),
+            campoNom: $('#nombreModificar')
+        }
+
+        let urlAJAX = {
+            urlPeticionAJAX: '<?=base_url('CategoriaController/getById/');?>' +
+                datasAndCampos.dataID,
+            urlEnvioAJAX: '<?= base_url('CategoriaController/modificarDatos/') ?>',
+        }
+
+        modificar_mediante_AJAX(datasAndCampos, urlAJAX, toggleModal);
+    });
+
+    // Añadir peliculas
+    $('#button-ModalAnadir').on('click', function() {
+        let datasAndCampos = {
+            dataID: $(this).data('id'),
+            campoID: $('#idInput'),
+            campoNom: $('#nombreInput'),
+            campoDireccion: $('#direccionInput'),
+            campoDescripcion: $('#descripcionInput'),
+            selectValue: '.modal-Input-select',
+        };
+        let urlEnvioAJAX = '<?= base_url('CategoriaController/addNew/') ?>';
+
+        añadir_mediante_AJAX(datasAndCampos, urlEnvioAJAX, toggleModal);
+
+    });
+})
+</script>

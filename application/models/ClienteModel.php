@@ -9,11 +9,27 @@ class ClienteModel extends CI_Model{
 
     public function getByID(int $id){
         $this -> db -> get('cliente');
-        $this -> db -> where('nom_categoria', $id) -> row();
+        $this -> db -> where('id_cliente', $id);
+        return $this->db->get('cliente')->row();
     }
 
-    public function deleteById(int $id){
-        return $this->db->delete('cliente', array('id' => $id));
+    public function deleteByID(int $id){
+        return $this->db->delete('cliente', array('id_cliente' => $id));
     }
 
+    public function modificarDatos($id, $nombre){
+        $data = array(
+            'nom_cliente' => $nombre
+        );
+
+        $this->db->where('id_cliente', $id);
+        $this->db->update('cliente', $data);
+    }
+
+    public function addNew($nombre){
+        $data = array(
+            'nom_cliente' => $nombre
+        );
+        $this->db->insert('cliente', $data);
+    }
 }

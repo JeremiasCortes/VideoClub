@@ -10,52 +10,32 @@ class CategoriaController extends CI_Controller {
         $this -> load -> view('plantilla', $cuerpoDeLaPagina);
     }
 
-    public function eliminar(int $id){
+    public function eliminarByID(int $id){
         $this -> load -> model('CategoriaModel');
         $this -> CategoriaModel -> deleteById($id);
-        $cuerpoDeLaPagina['contenido'] = 'Pelicula/eliminar';
     }
 
-    /**
-     * Método para obtener los detalles de una película por su ID.
-     *
-     * @param int $id El ID de la película.
-     */
-    public function getPeliculaById_and_Categoria($id) {
-        $this -> load -> model('PeliculaModel');
-        // Devolver los datos como JSON
-        echo json_encode($this -> PeliculaModel -> getPeliculaById_and_Categoria($id));
-
-    }
-
-    /**
-     * Método para modificar una película.
-     */
-    public function modificarPelicula() {
-    // Obtener los datos del formulario
+    public function modificarDatos() {
     $id = $this->input->post('id');
     $nombre = $this->input->post('nombre');
-    $direccion = $this->input->post('direccion');
-    $descripcion = $this->input->post('descripcion');
-    $categoria_id = $this->input->post('categoria_id');
     
-    // Cargar el modelo de películas
-    $this->load->model('PeliculaModel');
+    $this->load->model('CategoriaModel');
 
-    // Llamar al método del modelo para modificar la película
-    $this->PeliculaModel->modificarPelicula($id, $nombre, $direccion, $descripcion, $categoria_id);
+    $this->CategoriaModel->modificarDatos($id, $nombre);
     }
 
-    public function addPelicula(){
+    public function addNew(){
         
         $nom = $this->input->post('nom');
-        $direccion = $this->input->post('direccion');
-        $descripcion = $this->input->post('descripcion');
-        $categoria = $this->input->post('categoria');
 
-        $this->load->model('PeliculaModel');
+        $this->load->model('CategoriaModel');
 
-        $this->PeliculaModel->addPelicula($nom, $direccion, $descripcion, $categoria);
+        $this->CategoriaModel->addNew($nom);
+    }
+
+    public function getById(int $id) {
+        $this->load->model('CategoriaModel');
+        echo json_encode($this->CategoriaModel->getById($id));
     }
 
 }    

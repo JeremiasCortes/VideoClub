@@ -54,9 +54,6 @@
         </table>
     </div>
 
-    <!-- Modal Nueva Pelicula -->
-    <?php $this->load->view('Modales/Anadir'); ?>
-
     <!-- Modal Eliminar Pelicula -->
     <?php $this->load->view('Modales/Eliminar'); ?>
 
@@ -90,11 +87,11 @@ $(function() {
     $('table.tabla-con-el-contenido').on('click', '.boton-modificar-pelicula', function(e) {
         let datasAndCampos = {
             dataID: $(this).data('id'),
-            campoID: $('#idModificar'),
-            campoNom: $('#nombreModificar'),
-            campoDireccion: $('#direccionModificar'),
-            campoDescripcion: $('#descripcionModificar'),
-            selectValue: '.modal-modificar-select',
+            campoID: $('#idInput'),
+            campoNom: $('#nombreInput'),
+            campoDireccion: $('#direccionInput'),
+            campoDescripcion: $('#descripcionInput'),
+            selectValue: '.modal-Input-select',
         }
 
         let urlAJAX = {
@@ -107,12 +104,20 @@ $(function() {
     });
 
     // Añadir peliculas
-    
     $('#button-ModalAnadir').on('click', function(){
+        let datasAndCampos = {
+            dataID: $(this).data('id'),
+            campoID: $('#idInput'),
+            campoNom: $('#nombreInput'),
+            campoDireccion: $('#direccionInput'),
+            campoDescripcion: $('#descripcionInput'),
+            selectValue: '.modal-Input-select',
+        };
+        
         let urlEnvioAJAX = '<?= base_url('PeliculaController/addPelicula/') ?>';
 
-        añadir_mediante_AJAX(urlEnvioAJAX, toggleModal)
-    });
+        añadir_mediante_AJAX(datasAndCampos, urlEnvioAJAX, toggleModal);
+    })
 
 })
 </script>

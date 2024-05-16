@@ -10,52 +10,40 @@ class ClienteController extends CI_Controller {
         $this -> load -> view('plantilla', $cuerpoDeLaPagina);
     }
 
-    public function eliminar(int $id){
-        $this -> load -> model('CategoriaModel');
-        $this -> CategoriaModel -> deleteById($id);
-        $cuerpoDeLaPagina['contenido'] = 'Pelicula/eliminar';
-    }
-
-    /**
-     * Método para obtener los detalles de una película por su ID.
-     *
-     * @param int $id El ID de la película.
-     */
-    public function getPeliculaById_and_Categoria($id) {
-        $this -> load -> model('PeliculaModel');
-        // Devolver los datos como JSON
-        echo json_encode($this -> PeliculaModel -> getPeliculaById_and_Categoria($id));
-
+    public function eliminarByID(int $id){
+        $this -> load -> model('ClienteModel');
+        $this -> ClienteModel -> deleteById($id);
     }
 
     /**
      * Método para modificar una película.
      */
-    public function modificarPelicula() {
-    // Obtener los datos del formulario
+    public function modificarDatos() {
     $id = $this->input->post('id');
     $nombre = $this->input->post('nombre');
-    $direccion = $this->input->post('direccion');
-    $descripcion = $this->input->post('descripcion');
-    $categoria_id = $this->input->post('categoria_id');
     
-    // Cargar el modelo de películas
-    $this->load->model('PeliculaModel');
+    $this->load->model('ClienteModel');
 
-    // Llamar al método del modelo para modificar la película
-    $this->PeliculaModel->modificarPelicula($id, $nombre, $direccion, $descripcion, $categoria_id);
+    $this->ClienteModel->modificarDatos($id, $nombre);
     }
 
-    public function addPelicula(){
+    public function addnew(){
         
         $nom = $this->input->post('nom');
-        $direccion = $this->input->post('direccion');
-        $descripcion = $this->input->post('descripcion');
-        $categoria = $this->input->post('categoria');
 
-        $this->load->model('PeliculaModel');
+        $this->load->model('ClienteModel');
 
-        $this->PeliculaModel->addPelicula($nom, $direccion, $descripcion, $categoria);
+        $this->ClienteModel->addnew($nom);
+    }
+
+    public function getById(int $id) {
+        $this->load->model('ClienteModel');
+        echo json_encode($this->ClienteModel->getById($id));
+    }
+
+    public function test(int $id){
+        $this->load->model('ClienteModel');
+        echo json_encode($this -> ClienteModel -> test($id));
     }
 
 }    
