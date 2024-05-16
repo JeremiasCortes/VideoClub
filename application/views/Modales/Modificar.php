@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="formModal formulario-añadir-modificar" class="row g-3 needs-validation">
+                <form id="formModal formulario-añadir-modificar" class="row g-3 needs-validation" method="post">
                     <div class="col-md-<?= (isset($SQL_Peliculas)) ? '2' : '4'; ?>">
                         <label for="idInput" class="form-label">ID</label>
                         <input type="text" class="form-control bg-dark" id="idInput" name="id" value="" readonly>
@@ -41,7 +41,7 @@
                     <div class="modal-footer d-flex justify-content-between">
                         <button type="button" class="btn btn-outline-secondary"
                             data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-outline-primary enviar">Modificar</button>
+                        <button type="submit" class="btn btn-outline-primary enviar">Modificar</button>
                     </div>
                 </form>
             </div>

@@ -32,10 +32,11 @@ function modificar_mediante_AJAX(
 	if (datas.campoDireccion) {
 		datas.campoDireccion.val("");
 		datas.campoDescripcion.val("");
-		$(datas.selectValue + ' option:first').prop('selected',true);
+		$(datas.selectValue + " option:first").prop("selected", true);
 	}
 
 	$(".title-modal").text("Modificar");
+	$('.enviar').text("Modificar");
 	modal("Modificar");
 	$.ajax({
 		url: urlPeticionAJAX,
@@ -53,16 +54,17 @@ function modificar_mediante_AJAX(
 			}
 		},
 	});
+
 	$(".enviar").on("click", function () {
 		$.ajax({
 			url: urlEnvioAJAX,
-			type: "POST",
+			type: "GET",
 			data: {
 				id: datas.campoID.val(),
 				nombre: datas.campoNom.val(),
-				direccion: datas.campoDireccion.val(),
-				descripcion: datas.campoDescripcion.val(),
-				categoria_id: $(datas.selectValue + " option:selected").val(),
+				direccion: (datas.campoDireccion) ? datas.campoDireccion.val() : null,
+				descripcion: (datas.campoDescripcion) ? datas.campoDescripcion.val() : null,
+				categoria_id: (datas.categoria_id) ? $(datas.selectValue + " option:selected").val() : null,
 			},
 			success: function () {
 				modal("Modificar");
@@ -70,13 +72,15 @@ function modificar_mediante_AJAX(
 				$("#columna-con-id-" + datas.campoID.val())
 					.find("td:eq(1)")
 					.text(datas.campoNom.val());
-				$("#columna-con-id-" + datas.campoID.val())
-					.find("td:eq(2)")
-					.text(datas.campoDireccion.val());
-				$("#columna-con-id-" + datas.campoID.val())
-					.find("td:eq(3)")
-					.find("span")
-					.text(datas.campoDescripcion.val());
+				if (datas.campoDireccion) {
+					$("#columna-con-id-" + datas.campoID.val())
+						.find("td:eq(2)")
+						.text(datas.campoDireccion.val());
+					$("#columna-con-id-" + datas.campoID.val())
+						.find("td:eq(3)")
+						.find("span")
+						.text(datas.campoDescripcion.val());
+				}
 			},
 		});
 	});
@@ -85,36 +89,34 @@ function modificar_mediante_AJAX(
 // FUNCIONA | NO TOCAR
 function añadir_mediante_AJAX(datas, urlPeticionAJAX, modal) {
 	$(".title-modal").text("Añadir");
-	datas.campoID.val('');
+	$('.enviar').text("Añadir");
+	datas.campoID.val("");
 	datas.campoNom.val("");
 	if (datas.campoDireccion) {
 		datas.campoDireccion.val("");
 		datas.campoDescripcion.val("");
-		$(datas.selectValue + ' option:first').prop('selected',true);
+		$(datas.selectValue + " option:first").prop("selected", true);
 	}
 
+	
 	modal("Modificar");
 	$("#formModal").submit(function (e) {
 		e.preventDefault();
-		let valueOfCampos = {
-			Nombre: $("#nombreAñadir").val(),
-			Direccion: $("#direccionAñadir").val(),
-			Descripcion: $("#descripcionAñadir").val(),
-			Categoria: $(".modal-anadir-select option:selected").val(),
-		};
 		$.ajax({
 			url: urlPeticionAJAX,
 			type: "POST",
+			dataType: "json",
 			data: {
-				nom: valueOfCampos.Nombre,
-				direccion: valueOfCampos.Direccion,
-				descripcion: valueOfCampos.Descripcion,
-				categoria: valueOfCampos.Categoria,
+				nombre: datas.campoNom.val(),
+				direccion: (datas.campoDireccion) ? datas.campoDireccion.val() : null,
+				descripcion: (datas.campoDescripcion) ? datas.campoDescripcion.val() : null,
+				categoria_id: (datas.selectValue) ? $(datas.selectValue + " option:selected").val() : null,
 			},
 			success: function () {
 				modal("Anadir");
 				location.reload();
 				modal("Realizado");
+				console.log(datas.campoNom.val());
 			},
 		});
 	});

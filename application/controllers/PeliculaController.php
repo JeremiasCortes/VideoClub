@@ -39,7 +39,6 @@ class PeliculaController extends CI_Controller {
     public function eliminar(int $id){
         $this -> load -> model('PeliculaModel');
         $this -> PeliculaModel -> deletePeliculaById($id);
-        $cuerpoDeLaPagina['contenido'] = 'Pelicula/eliminar';
     }
 
     /**
@@ -74,14 +73,14 @@ class PeliculaController extends CI_Controller {
 
     public function addPelicula(){
         
-        $nom = $this->input->post('nom');
+        $nom = $this->input->post('nombre');
         $direccion = $this->input->post('direccion');
         $descripcion = $this->input->post('descripcion');
-        $categoria = $this->input->post('categoria');
+        $categoria_id = $this->input->post('categoria');
 
         $this->load->model('PeliculaModel');
 
-        $this->PeliculaModel->addPelicula($nom, $direccion, $descripcion, $categoria);
+        $this->PeliculaModel->addPelicula($nom, $direccion, $descripcion, $categoria_id);
     }
 
 }    

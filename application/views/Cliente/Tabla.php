@@ -2,11 +2,11 @@
     <!-- Botón que abre el Modal de Anadir-->
     <?php $this->load->view('Modales/OpenAnadir'); ?>
 
-    <!-- Tabla/Listado de peliculas -->
+    <!-- Tabla/Listado de la consulta SQL -->
     <div class="table-responsive">
         <table class="table caption-top table-dark table-striped table-bordered align-middle tabla-con-el-contenido"
             id="tabla">
-            <caption class="text-light">Datos de Peliculas</caption>
+            <caption class="text-light">Datos de Clientes</caption>
             <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -42,8 +42,6 @@
         </table>
     </div>
 
-    <!-- Modal Nueva Pelicula -->
-    <?php $this->load->view('Modales/Anadir'); ?>
 
     <!-- Modal Eliminar Pelicula -->
     <?php $this->load->view('Modales/Eliminar'); ?>
@@ -79,30 +77,26 @@ $(function() {
     $('table.tabla-con-el-contenido').on('click', '.boton-modificar-pelicula', function(e) {
         let datasAndCampos = {
             dataID: $(this).data('id'),
-            campoID: $('#idModificar'),
-            campoNom: $('#nombreModificar')
+            campoID: $('#idInput'),
+            campoNom: $('#nombreInput')
         }
         let urlAJAX = {
             urlPeticionAJAX: '<?=base_url('ClienteController/getByID/');?>' +
                 datasAndCampos.dataID,
-            urlEnvioAJAX: '<?= base_url('ClienteController/modificarPelicula/') ?>',
+            urlEnvioAJAX: '<?= base_url('ClienteController/modificarDatos/') ?>',
         }
 
         modificar_mediante_AJAX(datasAndCampos, urlAJAX, toggleModal);
     });
 
     // Añadir peliculas
-
     $('#button-ModalAnadir').on('click', function() {
         let datasAndCampos = {
             dataID: $(this).data('id'),
             campoID: $('#idInput'),
             campoNom: $('#nombreInput'),
-            campoDireccion: $('#direccionInput'),
-            campoDescripcion: $('#descripcionInput'),
-            selectValue: '.modal-Input-select',
         };
-        let urlEnvioAJAX = '<?= base_url('ClienteController/addPelicula/') ?>';
+        let urlEnvioAJAX = '<?= base_url('ClienteController/addNew/') ?>';
 
         añadir_mediante_AJAX(datasAndCampos, urlEnvioAJAX, toggleModal);
 

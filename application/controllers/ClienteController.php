@@ -29,21 +29,23 @@ class ClienteController extends CI_Controller {
 
     public function addnew(){
         
-        $nom = $this->input->post('nom');
+        $nom = $this->input->post('nombre');
 
         $this->load->model('ClienteModel');
 
-        $this->ClienteModel->addnew($nom);
+        $this->ClienteModel->addNew($nom);
     }
 
     public function getById(int $id) {
         $this->load->model('ClienteModel');
-        echo json_encode($this->ClienteModel->getById($id));
-    }
-
-    public function test(int $id){
-        $this->load->model('ClienteModel');
-        echo json_encode($this -> ClienteModel -> test($id));
+        $cliente = $this->ClienteModel->getById($id);
+    
+        $result = [
+            'id' => $cliente->id_cliente,
+            'nom' => $cliente->nom_cliente
+        ];
+    
+        echo json_encode($result);
     }
 
 }    

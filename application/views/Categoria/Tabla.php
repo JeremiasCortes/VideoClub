@@ -1,15 +1,12 @@
 <div class="container mt-4 mb-5">
-    <div class="text-center">
-        <button type="button" class="btn btn-primary" id='button-ModalAnadir'>
-            ¡Nueva Alta de Pelicula!
-        </button>
-    </div>
+    <!-- Botón que abre el Modal de Anadir-->
+    <?php $this->load->view('Modales/OpenAnadir'); ?>
 
-    <!-- Tabla/Listado de peliculas -->
+    <!-- Tabla/Listado de la consulta SQL -->
     <div class="table-responsive">
         <table class="table caption-top table-dark table-striped table-bordered align-middle tabla-con-el-contenido"
             id="tabla">
-            <caption class="text-light">Datos de Peliculas</caption>
+            <caption class="text-light">Datos de Categorias</caption>
             <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -45,8 +42,7 @@
         </table>
     </div>
 
-    <!-- Modal Nueva Pelicula -->
-    <?php $this->load->view('Modales/Anadir'); ?>
+
 
     <!-- Modal Eliminar Pelicula -->
     <?php $this->load->view('Modales/Eliminar'); ?>
@@ -78,8 +74,8 @@ $(function() {
     $('table.tabla-con-el-contenido').on('click', '.boton-modificar-pelicula', function(e) {
         let datasAndCampos = {
             dataID: $(this).data('id'),
-            campoID: $('#idModificar'),
-            campoNom: $('#nombreModificar')
+            campoID: $('#idInput'),
+            campoNom: $('#nombreInput')
         }
 
         let urlAJAX = {
@@ -87,7 +83,6 @@ $(function() {
                 datasAndCampos.dataID,
             urlEnvioAJAX: '<?= base_url('CategoriaController/modificarDatos/') ?>',
         }
-
         modificar_mediante_AJAX(datasAndCampos, urlAJAX, toggleModal);
     });
 
@@ -97,9 +92,6 @@ $(function() {
             dataID: $(this).data('id'),
             campoID: $('#idInput'),
             campoNom: $('#nombreInput'),
-            campoDireccion: $('#direccionInput'),
-            campoDescripcion: $('#descripcionInput'),
-            selectValue: '.modal-Input-select',
         };
         let urlEnvioAJAX = '<?= base_url('CategoriaController/addNew/') ?>';
 

@@ -1,10 +1,6 @@
 <div class="container mt-4 mb-5">
-    <!-- Agregar un botón original para abrir un nuevo modal -->
-    <div class="text-center">
-        <button type="button" class="btn btn-primary" id='button-ModalAnadir'>
-            ¡Nueva Alta de Pelicula!
-        </button>
-    </div>
+    <!-- Botón que abre el Modal de Anadir-->
+    <?php $this->load->view('Modales/OpenAnadir'); ?>
 
     <!-- Tabla/Listado de peliculas -->
     <div class="table-responsive">

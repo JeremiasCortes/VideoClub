@@ -26,7 +26,7 @@ class CategoriaController extends CI_Controller {
 
     public function addNew(){
         
-        $nom = $this->input->post('nom');
+        $nom = $this->input->post('nombre');
 
         $this->load->model('CategoriaModel');
 
@@ -35,8 +35,14 @@ class CategoriaController extends CI_Controller {
 
     public function getById(int $id) {
         $this->load->model('CategoriaModel');
-        echo json_encode($this->CategoriaModel->getById($id));
+        $categoria = $this->CategoriaModel->getById($id);
+    
+        $result = [
+            'id' => $categoria->id_categoria,
+            'nom' => $categoria->nom_categoria
+        ];
+    
+        echo json_encode($result);
     }
-
 }    
 ?>

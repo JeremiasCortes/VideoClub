@@ -21,15 +21,12 @@ class ClienteModel extends CI_Model{
         $data = array(
             'nom_cliente' => $nombre
         );
-
         $this->db->where('id_cliente', $id);
         $this->db->update('cliente', $data);
     }
 
     public function addNew($nombre){
-        $data = array(
-            'nom_cliente' => $nombre
-        );
-        $this->db->insert('cliente', $data);
+
+        $this->db->insert('cliente', array('nom_cliente' => $nombre));
     }
 }

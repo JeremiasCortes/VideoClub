@@ -27,10 +27,7 @@ class CategoriaModel extends CI_Model{
     }
 
     public function addNew($nombre){
-        $data = array(
-            'nom_categoria' => $nombre
-        );
-        $this->db->insert('categoria', $data);
+        $this->db->insert('categoria', array('nom_categoria' => $nombre));
     }
 
 }
