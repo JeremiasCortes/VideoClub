@@ -10,12 +10,15 @@ function eliminar_mediante_AJAX(datas, urlPeticionAJAX, modal) {
 	$(".pelicula-a-eliminar").html(datas.name);
 	$("#ModalEliminar").on("click", "#btn-eliminar", function () {
 		$("#columna-con-id-" + datas.id).remove();
+        $('.tarjeta-' + datas.id).remove();
+
 		$.ajax({
 			url: urlPeticionAJAX,
 			type: "POST",
 			success: function () {
-				toggleModal("Eliminar");
-				toggleModal("Realizado");
+				modal("Eliminar");
+				modal("Realizado");
+				
 			},
 		});
 	});
@@ -27,13 +30,7 @@ function modificar_mediante_AJAX(
 	{ urlPeticionAJAX, urlEnvioAJAX },
 	modal
 ) {
-	datas.campoID.val("");
-	datas.campoNom.val("");
-	if (datas.campoDireccion) {
-		datas.campoDireccion.val("");
-		datas.campoDescripcion.val("");
-		$(datas.selectValue + " option:first").prop("selected", true);
-	}
+	limpiarInputs(datas);
 
 	$(".title-modal").text("Modificar");
 	$(".enviar").text("Modificar");
@@ -95,14 +92,7 @@ function modificar_mediante_AJAX(
 function añadir_mediante_AJAX(datas, urlPeticionAJAX, modal) {
 	$(".title-modal").text("Añadir");
 	$(".enviar").text("Añadir");
-	datas.campoID.val("");
-	datas.campoNom.val("");
-	if (datas.campoDireccion) {
-		datas.campoDireccion.val("");
-		datas.campoDescripcion.val("");
-		$(datas.selectValue + " option:first").prop("selected", true);
-	}
-
+	limpiarInputs(datas);
 	modal("Modificar");
 
 	$(".enviar").on("click", function (e) {
@@ -118,9 +108,20 @@ function añadir_mediante_AJAX(datas, urlPeticionAJAX, modal) {
 			},
 			success: function () {
 				modal("Modificar");
-				// location.reload();
+				location.reload();
 				modal("Realizado");
 			},
 		});
 	});
+}
+
+function limpiarInputs(datas){
+	datas.campoID.val("");
+	datas.campoNom.val("");
+	if (datas.campoDireccion) {
+		datas.campoDireccion.val("");
+		datas.campoDescripcion.val("");
+		$(datas.selectValue + " option:first").prop("selected", true);
+	}
+
 }
