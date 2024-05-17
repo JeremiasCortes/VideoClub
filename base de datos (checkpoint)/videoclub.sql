@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-05-2024 a las 13:01:45
--- Versión del servidor: 5.7.36
--- Versión de PHP: 8.1.3
+-- Tiempo de generación: 17-05-2024 a las 12:50:32
+-- Versión del servidor: 5.6.51
+-- Versión de PHP: 8.0.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -59,13 +59,12 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id_categoria`, `nom_categoria`) VALUES
-(1, 'acción'),
+(1, 'Sin definir'),
 (2, 'comedia'),
 (3, 'drama'),
 (4, 'romántica'),
 (5, 'suspense'),
-(6, 'Sin definir'),
-(7, 'Test');
+(6, 'acción');
 
 -- --------------------------------------------------------
 
@@ -89,8 +88,7 @@ INSERT INTO `cliente` (`id_cliente`, `nom_cliente`) VALUES
 (4, 'Eusebio Valle'),
 (5, 'Ignacio Pelaez'),
 (6, 'Loreto Echeverria'),
-(7, 'Brais Galindo'),
-(8, 'Jeremias Cortés');
+(7, 'Brais Galindo');
 
 -- --------------------------------------------------------
 
@@ -101,11 +99,11 @@ INSERT INTO `cliente` (`id_cliente`, `nom_cliente`) VALUES
 CREATE TABLE `pelicula` (
   `id` int(8) NOT NULL,
   `nom` varchar(32) COLLATE utf8_spanish_ci NOT NULL,
-  `direccion` varchar(32) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `categoria_id` int(16) NOT NULL DEFAULT '6',
+  `direccion` varchar(32) COLLATE utf8_spanish_ci NOT NULL,
+  `categoria_id` int(16) DEFAULT '1',
   `caratula_jpg` varchar(8) COLLATE utf8_spanish_ci NOT NULL DEFAULT '0.jpg',
   `caratula_png` varchar(8) COLLATE utf8_spanish_ci NOT NULL DEFAULT '0.png',
-  `descripcion` text COLLATE utf8_spanish_ci
+  `descripcion` varchar(255) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -113,15 +111,15 @@ CREATE TABLE `pelicula` (
 --
 
 INSERT INTO `pelicula` (`id`, `nom`, `direccion`, `categoria_id`, `caratula_jpg`, `caratula_png`, `descripcion`) VALUES
-(1, 'Cadena Perpetua', 'Frank Darabont', 3, '1.jpg', '1.png', 'Andrew Dufresne es un hombre inocente que es acusado del asesinato de su mujer. Tras ser condenado a cadena perpetua, es enviado a la cÃ¡rcel de Shawshank, en Maine.'),
-(2, 'El padrino', 'Francis Ford Coppola', 5, '2.jpg', '2.png', 'Don Vito Corleone es el respetado y temido jefe de una de las cinco familias de la mafia de Nueva York en los aÃ±os 40. El hombre tiene cuatro hijos: Connie, Sonny, Fredo y Michael, que no quiere saber nada de los negocios sucios de su padre.'),
-(3, 'Batman', 'Matt Reeves', 1, '3.jpg', '3.png', 'En su segundo aÃ±o luchando contra el crimen, Batman explora la corrupciÃ³n existente en la ciudad de Gotham y el vÃ­nculo de esta con su propia familia. AdemÃ¡s, entrar en conflicto con un asesino en serie conocido como el Joker'),
+(1, 'Cadena Perpetua', 'Frank Darabont', 3, '1.jpg', '1.png', 'Andrew Dufresne es un hombre inocente que es acusado del asesinato de su mujer. Tras ser condenado a cadena perpetua, es enviado a la cárcel de Shawshank, en Maine.'),
+(2, 'El padrino', 'Francis Ford Coppola', 5, '2.jpg', '2.png', 'Don Vito Corleone es el respetado y temido jefe de una de las cinco familias de la mafia de Nueva York en los años 40. El hombre tiene cuatro hijos: Connie, Sonny, Fredo y Michael, que no quiere saber nada de los negocios sucios de su padre.'),
+(3, 'Batman', 'Matt Reeves', 1, '3.jpg', '3.png', 'En su segundo año luchando contra el crimen, Batman explora la corrupción existente en la ciudad de Gotham y el vínculo de esta con su propia familia. Además, entrará en conflicto con un asesino en serie conocido como \"el Acertijo\".'),
 (4, '12 Hombres sin piedad', 'Sidney Lumet', 5, '4.jpg', '4.png', 'Multipremiado drama judicial de Sidney Lumet en el que un brillante reparto se encarga de dar vida a un jurado popular en un caso de parricidio.'),
-(5, 'La lista de schindler', 'Steven Spielberg', 3, '5.jpg', '5.png', 'Oskar Schindler, un hombre de enorme astucia y talento organiza un ambicioso plan para ganarse la simpatÃ­a de los nazis y a la vez poder rescatar a miles de judÃ­os.'),
-(7, 'Pulp fiction', 'Quentin Tarantino', 2, '7.jpg', '7.png', 'Historias de dos matones, un boxeador y una pareja de atracadores de poca monta envueltos en una violencia espectacular e irÃ³nica.'),
-(8, 'El bueno, el malo y el feo', 'Sergio Leone', 4, '8.jpg', '8.png', 'Los protagonistas son tres cazadores de recompensas que buscan un tesoro que ninguno de ellos puede encontrar sin la ayuda de los otros dos. AsÃ­ que los tres colaboran entre sÃ­, al menos en apariencia.'),
-(9, 'Nanking, ciudad de vida y muerte', 'Lu Chuan', 4, '9.jpg', '9.png', 'Las historias de un soldado japonÃ©s y un oficial chino relatan las atrocidades cometidas por las fuerzas japonesas durante la ocupaciÃ³n de Nanking en 1937.'),
-(39, 'Trolls 2', 'Para Meki', 3, '0.jpg', '0.png', 'Pelicula favorita de mi baby');
+(5, 'La lista de schindler', 'Steven Spielberg', 3, '5.jpg', '5.png', 'Oskar Schindler, un hombre de enorme astucia y talento organiza un ambicioso plan para ganarse la simpatía de los nazis y a la vez poder rescatar a miles de judíos.'),
+(6, 'El señor de los anillos', 'Peter Jackson', 2, '6.jpg', '6.png', 'En la Tierra Media, el Señor Oscuro Sauron forjó los Grandes Anillos del Poder y creó uno con el poder de esclavizar a toda la Tierra Media. Frodo Bolsón es un hobbit al que su tío Bilbo hace portador del poderoso Anillo Único con la misión de destruirlo.'),
+(7, 'Pulp fiction', 'Quentin Tarantino', 2, '7.jpg', '7.png', 'Historias de dos matones, un boxeador y una pareja de atracadores de poca monta envueltos en una violencia espectacular e irónica.'),
+(8, 'El bueno, el malo y el feo', 'Sergio Leone', 4, '8.jpg', '8.png', 'Los protagonistas son tres cazadores de recompensas que buscan un tesoro que ninguno de ellos puede encontrar sin la ayuda de los otros dos. Así que los tres colaboran entre sí, al menos en apariencia.'),
+(9, 'Nanking, ciudad de vida y muerte', 'Lu Chuan', 4, '9.jpg', '9.png', 'Las historias de un soldado japonés y un oficial chino relatan las atrocidades cometidas por las fuerzas japonesas durante la ocupación de Nanking en 1937.');
 
 --
 -- Índices para tablas volcadas
@@ -165,19 +163,19 @@ ALTER TABLE `alquiler`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_categoria` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_cliente` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
