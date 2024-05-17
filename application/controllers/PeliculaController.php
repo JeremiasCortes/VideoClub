@@ -76,7 +76,7 @@ class PeliculaController extends CI_Controller {
         $nom = $this->input->post('nombre');
         $direccion = $this->input->post('direccion');
         $descripcion = $this->input->post('descripcion');
-        $categoria_id = $this->input->post('categoria');
+        $categoria_id = $this->input->post('categoria_id');
 
         $this->load->model('PeliculaModel');
 

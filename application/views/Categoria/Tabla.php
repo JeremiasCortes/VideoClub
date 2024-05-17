@@ -89,7 +89,6 @@ $(function() {
     // Añadir peliculas
     $('#button-ModalAnadir').on('click', function() {
         let datasAndCampos = {
-            dataID: $(this).data('id'),
             campoID: $('#idInput'),
             campoNom: $('#nombreInput'),
         };

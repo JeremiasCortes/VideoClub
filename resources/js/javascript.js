@@ -36,13 +36,14 @@ function modificar_mediante_AJAX(
 	}
 
 	$(".title-modal").text("Modificar");
-	$('.enviar').text("Modificar");
+	$(".enviar").text("Modificar");
 	modal("Modificar");
 	$.ajax({
 		url: urlPeticionAJAX,
 		type: "POST",
 		dataType: "json",
 		success: function (response) {
+			console.log(response);
 			datas.campoID.val(response.id);
 			datas.campoNom.val(response.nom);
 			if (datas.campoDireccion) {
@@ -58,13 +59,17 @@ function modificar_mediante_AJAX(
 	$(".enviar").on("click", function () {
 		$.ajax({
 			url: urlEnvioAJAX,
-			type: "GET",
+			type: "POST",
 			data: {
 				id: datas.campoID.val(),
 				nombre: datas.campoNom.val(),
-				direccion: (datas.campoDireccion) ? datas.campoDireccion.val() : null,
-				descripcion: (datas.campoDescripcion) ? datas.campoDescripcion.val() : null,
-				categoria_id: (datas.categoria_id) ? $(datas.selectValue + " option:selected").val() : null,
+				direccion: datas.campoDireccion ? datas.campoDireccion.val() : null,
+				descripcion: datas.campoDescripcion
+					? datas.campoDescripcion.val()
+					: null,
+				categoria_id: datas.selectValue
+					? $(datas.selectValue + " option:selected").val()
+					: null,
 			},
 			success: function () {
 				modal("Modificar");
@@ -89,7 +94,7 @@ function modificar_mediante_AJAX(
 // FUNCIONA | NO TOCAR
 function añadir_mediante_AJAX(datas, urlPeticionAJAX, modal) {
 	$(".title-modal").text("Añadir");
-	$('.enviar').text("Añadir");
+	$(".enviar").text("Añadir");
 	datas.campoID.val("");
 	datas.campoNom.val("");
 	if (datas.campoDireccion) {
@@ -98,14 +103,13 @@ function añadir_mediante_AJAX(datas, urlPeticionAJAX, modal) {
 		$(datas.selectValue + " option:first").prop("selected", true);
 	}
 
-	
 	modal("Modificar");
-	$("#formModal").submit(function (e) {
+
+	$(".enviar").on("click", function (e) {
 		e.preventDefault();
 		$.ajax({
 			url: urlPeticionAJAX,
 			type: "POST",
-			dataType: "json",
 			data: {
 				nombre: datas.campoNom.val(),
 				direccion: (datas.campoDireccion) ? datas.campoDireccion.val() : null,
@@ -113,10 +117,9 @@ function añadir_mediante_AJAX(datas, urlPeticionAJAX, modal) {
 				categoria_id: (datas.selectValue) ? $(datas.selectValue + " option:selected").val() : null,
 			},
 			success: function () {
-				modal("Anadir");
-				location.reload();
+				modal("Modificar");
+				// location.reload();
 				modal("Realizado");
-				console.log(datas.campoNom.val());
 			},
 		});
 	});

@@ -27,6 +27,7 @@
                         <label for="categoriaInput" class="form-label">Categoria</label>
                         <select class="form-select bg-secondary text-light modal-Input-select"
                             aria-label="Default select example">
+                            <option selected disabled value="1">Selecciona una categoria</option>
                             <?php foreach ($SQL_Categorias as $categoria): ?>
                             <option value="<?=$categoria->id_categoria;?>"><?=$categoria->nom_categoria;?></option>
                             <?php endforeach;?>
