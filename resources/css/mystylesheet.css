@@ -27,3 +27,7 @@ footer {
     margin-top: auto; /* Empuja el footer hacia abajo */
 }
 
+.texto-pequeño{
+	font-size: 0.5rem;
+}
+

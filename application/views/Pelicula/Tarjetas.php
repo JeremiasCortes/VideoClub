@@ -1,7 +1,11 @@
-<?php $this->load->view('Modales/OpenAnadir'); ?>
+<title>Peliculas | Admin</title>
+
+
 
 
 <div class="container mt-4 mb-5 ">
+<?php $this->load->view('Modales/OpenAnadir'); ?>
+
     <div class="a">
         <div class="row row-cols-1 row-cols-md-4 g-4 contenedor-tarjetas mi-contenedor">
             <?php foreach($SQL_Peliculas as $SQL_Pelicula) : ?>

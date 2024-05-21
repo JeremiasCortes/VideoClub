@@ -1,3 +1,5 @@
+<title>Clientes | Admin</title>
+
 <div class="container mt-4 mb-5">
     <!-- Botón que abre el Modal de Anadir-->
     <?php $this->load->view('Modales/OpenAnadir'); ?>

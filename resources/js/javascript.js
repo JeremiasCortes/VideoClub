@@ -124,4 +124,7 @@ function limpiarInputs(datas){
 		$(datas.selectValue + " option:first").prop("selected", true);
 	}
 
+	<script>
+
+</script>
 }
