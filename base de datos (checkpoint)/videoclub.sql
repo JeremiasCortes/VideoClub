@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 17-05-2024 a las 12:50:32
+-- Tiempo de generación: 22-05-2024 a las 12:58:13
 -- Versión del servidor: 5.6.51
 -- Versión de PHP: 8.0.7
 
@@ -121,6 +121,19 @@ INSERT INTO `pelicula` (`id`, `nom`, `direccion`, `categoria_id`, `caratula_jpg`
 (8, 'El bueno, el malo y el feo', 'Sergio Leone', 4, '8.jpg', '8.png', 'Los protagonistas son tres cazadores de recompensas que buscan un tesoro que ninguno de ellos puede encontrar sin la ayuda de los otros dos. Así que los tres colaboran entre sí, al menos en apariencia.'),
 (9, 'Nanking, ciudad de vida y muerte', 'Lu Chuan', 4, '9.jpg', '9.png', 'Las historias de un soldado japonés y un oficial chino relatan las atrocidades cometidas por las fuerzas japonesas durante la ocupación de Nanking en 1937.');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
+--
+
+CREATE TABLE `users` (
+  `id_username` int(16) NOT NULL,
+  `username` varchar(64) COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(64) COLLATE utf8_spanish_ci NOT NULL,
+  `status` varchar(10) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
 --
 -- Índices para tablas volcadas
 --
@@ -150,6 +163,13 @@ ALTER TABLE `pelicula`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id_username`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -176,6 +196,12 @@ ALTER TABLE `cliente`
 --
 ALTER TABLE `pelicula`
   MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `id_username` int(16) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

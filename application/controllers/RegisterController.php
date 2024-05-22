@@ -12,7 +12,10 @@ class RegisterController extends CI_Controller {
     }
 
     public function registerNow(){
-        
+        if($_SERVER['ReQUEST_METHOD'] == 'POST'){
+            $this -> form_validation -> set_rules('username', 'Nombre de Usuario', 'required');
+            $this -> form_validation -> set_rules('username', 'Nombre de Usuario', 'required');
+        }
     }
-}    
+} 
 ?>
