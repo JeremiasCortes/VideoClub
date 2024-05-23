@@ -123,8 +123,11 @@ function limpiarInputs(datas){
 		datas.campoDescripcion.val("");
 		$(datas.selectValue + " option:first").prop("selected", true);
 	}
+}
 
-	<script>
-
-</script>
+function registerNameUser(){
+	if ($('.usernameInput').val() == $('.firstnameInput').val()) {
+        $('div#usernameInput').text('Recomendamos que no utilices tu nombre real');
+        $('div#usernameInput').show('fast');
+    }
 }
