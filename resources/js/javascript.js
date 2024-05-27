@@ -125,9 +125,12 @@ function limpiarInputs(datas){
 	}
 }
 
-function registerNameUser(){
-	if ($('.usernameInput').val() == $('.firstnameInput').val()) {
-        $('div#usernameInput').text('Recomendamos que no utilices tu nombre real');
-        $('div#usernameInput').show('fast');
-    }
+function validacionCSS(campo, estado){
+	if (estado){
+		campo.addClass('is-valid');
+		campo.removeClass('is-invalid');
+	} else {
+		campo.addClass('is-invalid');
+		campo.removeClass('is-valid');
+	}
 }
