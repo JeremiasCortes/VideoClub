@@ -11,7 +11,7 @@ class LoginController extends CI_Controller {
         $this -> load -> view('plantilla', $cuerpoDeLaPagina);
     }
 
-    public function registerNow(){
+    public function login(){
         
     }
 }    

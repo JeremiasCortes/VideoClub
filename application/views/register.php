@@ -9,8 +9,8 @@
                     <div class="card-body">
 
 
-                        <form method="post" autocomplete="off" class=" needs-validation" action="<?=base_url('')?>"
-                            id='registerForm' novalidate>
+                        <form method="post" autocomplete="off" class=" needs-validation"
+                            action="<?=base_url('RegisterController/registerNow')?>" id='registerForm' novalidate>
 
                             <div class="d-flex justify-content-center">
                                 <h1><i class="bi bi-person-circle"></i></h1>
@@ -27,7 +27,7 @@
                                 <input class="form-control bg-dark" type="text" placeholder="Nombre" name='firstname'
                                     id='firstnameInput' required />
                                 <div class="invalid-feedback text-danger">
-                                    Introduzca su nombre.
+                                    Introduzca su nombre. Entre 2-40 carácteres.
                                 </div>
                             </div>
 
@@ -41,18 +41,18 @@
                                 <input class="form-control bg-dark" type="text" placeholder="Apellido" name='lastname'
                                     id="lastnameInput" required />
                                 <div class="invalid-feedback text-danger">
-                                    Introduzca su apellido.
+                                    Introduzca su apellido. Entre 2-40 carácteres.
                                 </div>
                             </div>
 
                             <!-- /**
-                            * * Nameuser Input 
+                            * * username Input 
                             */ -->
                             <div class="input-group mb-3">
                                 <div class="input-group has-validation">
                                     <i class="bi bi-person-badge-fill input-group-text bg-info"></i>
                                     <input type="text" class="form-control bg-dark" placeholder="Usuario" required
-                                        name="nameuser" id="nameuserInput">
+                                        name="username" id="usernameInput">
                                     <div class="invalid-feedback text-danger">
                                         Introduzca un nombre de usuario válido. Debe contener 4-16 carácteres.
                                     </div>
@@ -76,26 +76,27 @@
                             <!-- /**
                             * * Password Input 
                             */ -->
-                            <div class="input-group mt-1">
+                            <div class="input-group mb-3">
                                 <div class="input-group-text bg-info">
                                     <i class="bi bi-lock-fill"></i>
                                 </div>
                                 <input class="form-control bg-dark" type="password" placeholder="Contraseña"
-                                    name='password' id="passwordInput" required />
+                                    name='password' id="passwordInput" required minlength="8" maxlength="100" />
                                 <div class="invalid-feedback text-danger">
-                                    La contraseña debe ser de 8-12 caracteres.
+                                    La contraseña debe ser de 8-100 caracteres.
                                 </div>
                             </div>
 
                             <!-- /**
                             * * Confirm Password Input 
                             */ -->
-                            <div class="input-group mt-1">
+                            <div class="input-group mb-3">
                                 <div class="input-group-text bg-info">
                                     <i class="bi bi-lock-fill"></i>
                                 </div>
                                 <input class="form-control bg-dark" type="password" placeholder="Repite la contraseña"
-                                    name='repeatPassword' id="repeatPasswordInput" required />
+                                    name='repeatPassword' id="repeatPasswordInput" required minlength="8"
+                                    maxlength="100" />
                                 <div class="invalid-feedback text-danger ">
                                     Las contraseñas deben de coincidir.
                                 </div>
@@ -105,7 +106,7 @@
                             * * Check Input 
                             */ -->
                             <div class="form-check mt-3">
-                                <input class="form-check-input bg-dark" type="checkbox" value="" id="terminos"
+                                <input class="form-check-input bg-dark" type="checkbox" value="1" id="terminos"
                                     name="terminos" required>
                                 <label class="form-check-label" for="invalidCheck">
                                     Acepto los términos y condiciones.
@@ -115,8 +116,8 @@
                                 </div>
                             </div>
 
-                            <button type='submit'
-                                class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm">Registrarse
+                            <button type='button'
+                                class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm btn-register">Registrarse
                             </button>
 
                             <div class="alert alert-danger mt-3 fw-bold invisible" role="alert"
@@ -124,6 +125,16 @@
                                 <i class="bi bi-exclamation-diamond"></i> Por favor rellena el formulario <i
                                     class="bi bi-exclamation-diamond"></i>
                             </div>
+
+                            <div class="alert alert-success mt-3 fw-bold visible" role="alert"
+                                id='message-submit-complet'>
+                                <i class="bi bi-check2-circle"></i> Registrado Exitosamente <i
+                                    class="bi bi-check2-circle"></i>
+                                <p><a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                                        href="#"><i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión <i class="bi bi-box-arrow-in-right"></i></a></p>
+                            </div>
+
+
                         </form>
                     </div>
                 </div>
@@ -135,87 +146,113 @@
 <script>
 $(function() {
     $('#message-submit-incomplet').hide();
+    $('#message-submit-complet').show();
     const $form = $('#registerForm');
     const $inputs = $('#registerForm input');
     $form.hide();
     $form.show(1000);
 
-    $form.submit((e) => {
+    $form.on('click', '.btn-register', (e) => {
         e.preventDefault();
+        if (camposState.firstname && camposState.lastname && camposState.email && camposState
+            .username && camposState.password && camposState.terminos) {
+            // $form.submit();
+            $('#message-submit-complet').show(500).addClass('visible').removeClass('invisible');
+            $('#message-submit-incomplet').show(500).addClass('invisible').removeClass('visible');
+
+        } else {
+            $('#message-submit-incomplet').show(500).addClass('visible').removeClass('invisible');
+        }
     })
 
     const expresiones = {
         usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
-        nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-        password: /^.{8,12}$/, // 8 a 12 digitos.
+        nombre: /^[a-zA-ZÀ-ÿ\s]{2,32}$/, // Letras y espacios, pueden llevar acentos.
+        password: /^.{8,100}$/, // 8 a 100 digitos.
         correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-        telefono: /^\d{7,14}$/ // 7 a 14 numeros.
+    }
+
+    const camposState = {
+        firstname: false,
+        lastname: false,
+        email: false,
+        username: false,
+        password: false,
+        terminos: false,
     }
 
     const camposInput = {
         firstname: $('#firstnameInput'),
         lastname: $('#lastnameInput'),
         email: $('#emailInput'),
-        nameuser: $('#nameuserInput'),
+        username: $('#usernameInput'),
         password: $('#passwordInput'),
         repeatPassword: $('#repeatPasswordInput'),
         terminos: $('#terminos'),
     }
 
-    const validarFormulario = (e) => {
-        switch (e.target.name) {
-            case 'firstname':
-                if (expresiones.nombre.test(e.target.value)) {
-                    validacionCSS(camposInput.firstname, true);
-                } else {
-                    validacionCSS(camposInput.firstname, false);
-                }
-                break;
-            case 'lastname':
-                if (expresiones.nombre.test(e.target.value)) {
-                    validacionCSS(camposInput.lastname, true);
-                } else {
-                    validacionCSS(camposInput.lastname, false);
-                }
-                break;
-            case 'email':
-                if (expresiones.correo.test(e.target.value)) {
-                    validacionCSS(camposInput.email, true);
-                } else {
-                    validacionCSS(camposInput.email, false);
-                }
-                break;
-            case 'nameuser':
-                if (expresiones.usuario.test(e.target.value)) {
-                    validacionCSS(camposInput.nameuser, true);
-                } else {
-                    validacionCSS(camposInput.nameuser, false);
-                }
-                break;
-            case 'password':
-                if (expresiones.password.test(e.target.value)) {
-                    validacionCSS(camposInput.password, true);
-                } else {
-                    validacionCSS(camposInput.password, false);
-                }
-                break;
-            case 'repeatPassword':
-                if (expresiones.password.test(e.target.value)) {
-                    validacionCSS(camposInput.repeatPassword, true);
-                } else {
-                    validacionCSS(camposInput.repeatPassword, false);
-                }
-                break;
-            case 'terminos':
-
-                break;
-
+    const validarRepeatPassword = () => {
+        const password1 = camposInput.password;
+        const password2 = camposInput.repeatPassword;
+        if (password1.val() !== password2.val()) {
+            validacionCSS(password2, false);
+            camposState['password'] = false;
+        } else {
+            validacionCSS(password2, true);
+            camposState['password'] = true;
         }
     }
 
+    const validarCampo = (campo, expresion, nameCampo) => {
+        if (expresion.test(campo.val())) {
+            validacionCSS(campo, true)
+            camposState[nameCampo] = true;
+        } else {
+            validacionCSS(campo, false);
+            camposState[nameCampo] = false;
+        }
+
+    }
+
+    const validarTerminos = (campo) => {
+        if (campo.is(':checked')) {
+            camposState.terminos = true;
+        } else {
+            camposState.terminos = false;
+        }
+    }
+
+    const validarFormulario = (e) => {
+        switch (e.target.name) {
+            case 'firstname':
+                validarCampo(camposInput.firstname, expresiones.nombre, e.target.name);
+                break;
+            case 'lastname':
+                validarCampo(camposInput.lastname, expresiones.nombre, e.target.name);
+                break;
+            case 'email':
+                validarCampo(camposInput.email, expresiones.correo, e.target.name);
+                break;
+            case 'username':
+                validarCampo(camposInput.username, expresiones.usuario, e.target.name);
+                break;
+            case 'password':
+                validarCampo(camposInput.password, expresiones.password, e.target.name);
+                validarRepeatPassword();
+                break;
+            case 'repeatPassword':
+                validarRepeatPassword();
+                break;
+            case 'terminos':
+                validarTerminos(camposInput.terminos);
+                break;
+        }
+    }
+
+
     $inputs.each((input) => {
-        $($inputs.eq(input)).on('keyup', validarFormulario)
-        $($inputs.eq(input)).on('blur', validarFormulario)
+        $($inputs.eq(input)).on('change', validarFormulario);
+        $($inputs.eq(input)).on('blur', validarFormulario);
     })
 })
 </script>
