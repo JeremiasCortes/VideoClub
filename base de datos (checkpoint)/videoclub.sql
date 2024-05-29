@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-05-2024 a las 12:58:13
--- Versión del servidor: 5.6.51
--- Versión de PHP: 8.0.7
+-- Tiempo de generación: 29-05-2024 a las 13:03:25
+-- Versión del servidor: 5.7.36
+-- Versión de PHP: 8.1.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -128,11 +128,22 @@ INSERT INTO `pelicula` (`id`, `nom`, `direccion`, `categoria_id`, `caratula_jpg`
 --
 
 CREATE TABLE `users` (
-  `id_username` int(16) NOT NULL,
-  `username` varchar(64) COLLATE utf8_spanish_ci NOT NULL,
-  `password` varchar(64) COLLATE utf8_spanish_ci NOT NULL,
-  `status` varchar(10) COLLATE utf8_spanish_ci NOT NULL
+  `id_users` int(11) NOT NULL,
+  `Firstname` varchar(32) COLLATE utf8_spanish_ci NOT NULL,
+  `Lastname` varchar(32) COLLATE utf8_spanish_ci NOT NULL,
+  `Email` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `Nameuser` varchar(16) COLLATE utf8_spanish_ci NOT NULL,
+  `Password` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `Status` varchar(10) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id_users`, `Firstname`, `Lastname`, `Email`, `Nameuser`, `Password`, `Status`) VALUES
+(6, 'nvhgg', 'dvsvf', 'dfrgrg@vznfd.com', 'dfafds', '7c222fb2927d828af22f592134e8932480637c0d', '1'),
+(1, 'Jeremy', 'Cortés', 'jeremias@jeremias.com', 'Jeremy', 'Jeremias123*', '');
 
 --
 -- Índices para tablas volcadas
@@ -166,8 +177,8 @@ ALTER TABLE `pelicula`
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id_username`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD PRIMARY KEY (`Nameuser`),
+  ADD UNIQUE KEY `id_users` (`id_users`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -201,7 +212,7 @@ ALTER TABLE `pelicula`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_username` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
