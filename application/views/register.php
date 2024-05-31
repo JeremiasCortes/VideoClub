@@ -17,6 +17,7 @@
                             </div>
                             <div class="text-center fs-1 fw-bold mytext-login-register mb-4">Registrarse</div>
 
+                            <?php if ($this -> session -> flashdata('registerSuccess') == NULL) :  ?>
                             <!-- /**
                             * * Firstname Input 
                             */ -->
@@ -120,20 +121,25 @@
                                 class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm btn-register">Registrarse
                             </button>
 
+                            
+                            <div class="form-text mt-1" style="font-size: 0.75rem">¿Tienes cuenta? <a class="link-opacity-100 text-white" href='<?=base_url('Login')?>'>Iniciar Sesión</a></div>
+                            
+
                             <div class="alert alert-danger mt-3 fw-bold invisible" role="alert"
                                 id='message-submit-incomplet'>
                                 <i class="bi bi-exclamation-diamond"></i> Por favor rellena el formulario <i
                                     class="bi bi-exclamation-diamond"></i>
                             </div>
-
-                            <div class="alert alert-success mt-3 fw-bold visible" role="alert"
-                                id='message-submit-complet'>
-                                <i class="bi bi-check2-circle"></i> Registrado Exitosamente <i
+                            <?php endif ?>
+                            <?php if ($this -> session -> flashdata('registerSuccess')) : ?>
+                            <div class="alert alert-success mt-3 visible pb-1" role="alert" id='message-submit-complet'>
+                                <i class="bi bi-check2-circle"></i> <?=$this->session->flashdata('registerSuccess');?> <i
                                     class="bi bi-check2-circle"></i>
                                 <p><a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                                        href="#"><i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión <i class="bi bi-box-arrow-in-right"></i></a></p>
+                                        href='<?= base_url('LoginController') ?>'><i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión <i
+                                            class="bi bi-box-arrow-in-right"></i></a></p>
                             </div>
-
+                            <?php endif; ?>
 
                         </form>
                     </div>
@@ -146,7 +152,6 @@
 <script>
 $(function() {
     $('#message-submit-incomplet').hide();
-    $('#message-submit-complet').show();
     const $form = $('#registerForm');
     const $inputs = $('#registerForm input');
     $form.hide();
@@ -156,10 +161,7 @@ $(function() {
         e.preventDefault();
         if (camposState.firstname && camposState.lastname && camposState.email && camposState
             .username && camposState.password && camposState.terminos) {
-            // $form.submit();
-            $('#message-submit-complet').show(500).addClass('visible').removeClass('invisible');
-            $('#message-submit-incomplet').show(500).addClass('invisible').removeClass('visible');
-
+            $form.submit();
         } else {
             $('#message-submit-incomplet').show(500).addClass('visible').removeClass('invisible');
         }
@@ -203,13 +205,15 @@ $(function() {
         }
     }
 
-    const validarCampo = (campo, expresion, nameCampo) => {
+    const validarCampo = (campo, expresion, targetCampo) => {
+        targetCampo.value = targetCampo.value.trim()
+        // console.log();
         if (expresion.test(campo.val())) {
             validacionCSS(campo, true)
-            camposState[nameCampo] = true;
+            camposState[targetCampo.name] = true;
         } else {
             validacionCSS(campo, false);
-            camposState[nameCampo] = false;
+            camposState[targetCampo.name] = false;
         }
 
     }
@@ -225,19 +229,20 @@ $(function() {
     const validarFormulario = (e) => {
         switch (e.target.name) {
             case 'firstname':
-                validarCampo(camposInput.firstname, expresiones.nombre, e.target.name);
+                
+                validarCampo(camposInput.firstname, expresiones.nombre, e.target);
                 break;
             case 'lastname':
-                validarCampo(camposInput.lastname, expresiones.nombre, e.target.name);
+                validarCampo(camposInput.lastname, expresiones.nombre, e.target);
                 break;
             case 'email':
-                validarCampo(camposInput.email, expresiones.correo, e.target.name);
+                validarCampo(camposInput.email, expresiones.correo, e.target);
                 break;
             case 'username':
-                validarCampo(camposInput.username, expresiones.usuario, e.target.name);
+                validarCampo(camposInput.username, expresiones.usuario, e.target);
                 break;
             case 'password':
-                validarCampo(camposInput.password, expresiones.password, e.target.name);
+                validarCampo(camposInput.password, expresiones.password, e.target);
                 validarRepeatPassword();
                 break;
             case 'repeatPassword':
@@ -252,7 +257,6 @@ $(function() {
 
     $inputs.each((input) => {
         $($inputs.eq(input)).on('change', validarFormulario);
-        $($inputs.eq(input)).on('blur', validarFormulario);
     })
 })
 </script>

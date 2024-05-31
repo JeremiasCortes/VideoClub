@@ -3,7 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['PeliculaController/1'] = 'PeliculaController/index/tarjetas';
 $route['PeliculaController/0'] = 'PeliculaController/index/';
-
+$route['Register'] = 'RegisterController/index/';
+$route['Login'] = 'LoginController/index/';
 
 $route['default_controller'] = 'indexController';
 $route['404_override'] = '';

@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class RegisterController extends CI_Controller {
     
     public function index(){
-        $this -> load -> model('PeliculaModel');
 
 		$cuerpoDeLaPagina['contenido'] = 'register';
 
@@ -14,8 +13,8 @@ class RegisterController extends CI_Controller {
     public function registerNow(){
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $this -> form_validation -> set_rules('username', 'Nombre de la persona', 'required');
-            $this -> form_validation -> set_rules('lastname', 'Apellido de la persona', 'required');
+            $this -> form_validation -> set_rules('username', 'Nombre', 'required');
+            $this -> form_validation -> set_rules('lastname', 'Apellido', 'required');
             $this -> form_validation -> set_rules('username', 'Nombre de usuario', 'required');
             $this -> form_validation -> set_rules('email', 'Correo elecrónico', 'required');
             $this -> form_validation -> set_rules('password', 'Contraseña', 'required');
@@ -31,19 +30,17 @@ class RegisterController extends CI_Controller {
                     'Firstname'=>$nombre,
                     'Lastname'=>$apellido,
                     'Email'=>$email,
-                    'Nameuser'=>$username,
-                    'Password'=>sha1($password),
+                    'Username'=>$username,
+                    'Password'=>'sha1'($password),
                     'Status'=>'1'
                 );
-                // $this->load->library('session');
 
-                $this -> load -> model('RegisterModel');
-                $this -> RegisterModel -> insertNewRegisterUser($data);
-                // $this->session->set_flashdata('success', 'Usuario Registrado Exitosamente');
+                $this -> load -> model('UsersModel');
+                $this -> UsersModel -> insertNewRegisterUser($data);
+                $this->session->set_flashdata('registerSuccess', 'Registrado Exitosamente');
                 redirect(base_url('RegisterController'));
             }
         }
     }
-
 } 
 ?>

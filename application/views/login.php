@@ -26,7 +26,7 @@
                                     <input type="text" class="form-control bg-dark" placeholder="Usuario" required
                                         name="username" id="usernameInput">
                                     <div class="invalid-feedback text-danger">
-                                        Introduzca su nombre de usuario. Contiene minimo 4 carácteres.
+                                        Debe de contener entre 4-16 carácteres.
                                     </div>
                                 </div>
                             </div>
@@ -41,19 +41,24 @@
                                 <input class="form-control bg-dark" type="password" placeholder="Contraseña"
                                     name='password' id="passwordInput" required minlength="8" maxlength="100" />
                                 <div class="invalid-feedback text-danger">
-                                    La contraseña debe ser de 8-100 caracteres.
+                                    Debe de tener una longitud minima de 8 carácteres
                                 </div>
                             </div>
-
-                            <button type='button'
-                                class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm btn-register">Iniciar Sesión
-                            </button>
-
+                            <?php if ($this -> session -> flashdata('errorLogin')) : ?>
                             <div class="alert alert-danger mt-3 fw-bold visible" role="alert"
                                 id='message-submit-incomplet'>
-                                <i class="bi bi-exclamation-diamond"></i> Por favor rellena los campos <i
-                                    class="bi bi-exclamation-diamond"></i>
+                                <i class="bi bi-exclamation-diamond"></i> <?=$this->session->flashdata('errorLogin')?>
+                                <i class="bi bi-exclamation-diamond"></i>
                             </div>
+                            <?php endif; ?>
+                            <button type='button'
+                                class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm btn-register">Iniciar
+                                Sesión
+                            </button>
+                            <div class="form-text mt-1" style="font-size: 0.75rem">¿No tienes cuenta? <a
+                                    class="link-opacity-100 text-white" href='<?=base_url('Register')?>'>Registrarse</a>
+                            </div>
+
 
 
                         </form>
@@ -66,7 +71,6 @@
 
 <script>
 $(function() {
-    $('#message-submit-incomplet').hide();
     const $form = $('#registerForm');
     const $inputs = $('#registerForm input');
     $form.hide();
@@ -75,49 +79,27 @@ $(function() {
     $form.on('click', '.btn-register', (e) => {
         e.preventDefault();
         console.log(camposState);
-        if (camposState.firstname && camposState.lastname && camposState.email && camposState
-            .username && camposState.password && camposState.terminos) {
+        if (camposState.username && camposState.password) {
             $form.submit();
-        };
+        }
     })
 
     const expresiones = {
         usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
-        nombre: /^[a-zA-ZÀ-ÿ\s]{2,32}$/, // Letras y espacios, pueden llevar acentos.
         password: /^.{8,100}$/, // 8 a 100 digitos.
-        correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     }
 
     const camposState = {
-        firstname: false,
-        lastname: false,
-        email: false,
         username: false,
         password: false,
-        terminos: false,
     }
 
     const camposInput = {
-        firstname: $('#firstnameInput'),
-        lastname: $('#lastnameInput'),
-        email: $('#emailInput'),
         username: $('#usernameInput'),
         password: $('#passwordInput'),
-        repeatPassword: $('#repeatPasswordInput'),
-        terminos: $('#terminos'),
     }
 
-    const validarRepeatPassword = () => {
-        const password1 = camposInput.password;
-        const password2 = camposInput.repeatPassword;
-        if (password1.val() !== password2.val()) {
-            validacionCSS(password2, false);
-            camposState['password'] = false;
-        } else {
-            validacionCSS(password2, true);
-            camposState['password'] = true;
-        }
-    }
+
 
     const validarCampo = (campo, expresion, nameCampo) => {
         if (expresion.test(campo.val())) {
@@ -130,37 +112,15 @@ $(function() {
 
     }
 
-    const validarTerminos = (campo) => {
-        if (campo.is(':checked')) {
-            camposState.terminos = true;
-        } else {
-            camposState.terminos = false;
-        }
-    }
+
 
     const validarFormulario = (e) => {
         switch (e.target.name) {
-            case 'firstname':
-                validarCampo(camposInput.firstname, expresiones.nombre, e.target.name);
-                break;
-            case 'lastname':
-                validarCampo(camposInput.lastname, expresiones.nombre, e.target.name);
-                break;
-            case 'email':
-                validarCampo(camposInput.email, expresiones.correo, e.target.name);
-                break;
             case 'username':
                 validarCampo(camposInput.username, expresiones.usuario, e.target.name);
                 break;
             case 'password':
                 validarCampo(camposInput.password, expresiones.password, e.target.name);
-                validarRepeatPassword();
-                break;
-            case 'repeatPassword':
-                validarRepeatPassword();
-                break;
-            case 'terminos':
-                validarTerminos(camposInput.terminos);
                 break;
         }
     }

@@ -50,7 +50,7 @@
 <body class="bg-info">
     <!-- ------ Navbar ----- -->
     <nav class="navbar bg-primary navbar-expand-lg sticky-top navbar-lightpy-3" data-bs-theme="rosa">
-        <div class="container px-4 px-lg-5 ">
+        <div class="container px-4 px-lg-3">
             <a class="navbar-brand " href="<?= base_url(); ?>"><i class="bi bi-disc-fill"> Érase una vez en un
                     DVD</i></a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
@@ -72,8 +72,10 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link " href="<?=base_url('/CategoriaController');?>">Categorias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?=base_url('/ClienteController');?>">Clientes</a></li>
+                    <li class="nav-item"><a class="nav-link " href="<?=base_url('CategoriaController');?>">Categorias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?=base_url('ClienteController');?>">Clientes</a></li>
+                    <hr>
+                    <li class="nav-item"><a class="nav-link" href="<?=base_url('Login');?>">Iniciar Sesión</a></li>
                 </ul>
             </div>
         </div>
