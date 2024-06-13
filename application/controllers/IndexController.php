@@ -2,7 +2,23 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class IndexController extends CI_Controller {
-    
+
+    public function __construct() {
+        parent::__construct();
+        
+        // Verificar si el usuario está logueado
+        $this->checkLogin();
+    }
+
+    private function checkLogin() {
+        // Verificar si el usuario está logueado
+        if (!$this->session->userdata('UserLoginSession')) {
+            // Si no está logueado, redirigir al login
+            redirect(base_url('Login'));
+        }
+    }
+
+
     public function index(){
         /**
          * Aquí se hace una instancia del modelo que se encargará de hacer las consultas a la base de datos 
